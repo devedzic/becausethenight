@@ -21,6 +21,20 @@
 #
 
 
-from becausethenight.python.inception import print_it
+# from becausethenight.python.inception import print_it
+#
+# print_it()
 
-print_it()
+
+# from becausethenight.python.expressions import demonstrate_arithmetic_operators
+#
+# demonstrate_arithmetic_operators()
+
+# from becausethenight.python.expressions import demonstrate_relational_operators
+#
+# demonstrate_relational_operators()
+
+from becausethenight.python.expressions import demonstrate_logical_operators
+
+demonstrate_logical_operators()
+

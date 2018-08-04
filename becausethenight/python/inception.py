@@ -4,6 +4,7 @@ def print_it():
     print("Because the Night")
     print()
     print('Because the night ' + '\n' + 'belongs to lovers')
+    # print(__name__)
 
 '''
 The following code is commented out, because it executes when print_it() is called from main.py. 
