@@ -3,6 +3,7 @@
 # print("Because the Night")
 # print()
 # print('Because the night ' + '\n' + 'belongs to lovers')
+# print('Because the night ' + 1)                           # generates an error
 
 
 # Hello World elaborated a bit, then moved to getting_started.beginning.py
