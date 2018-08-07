@@ -54,5 +54,14 @@ def demonstrate_string_operations():
         print('Because the Night doesn\'t end with \'Night\'')
     print('split():', song.split())
     print('center():', song.center(50, '*'))
+    if 'Because' in song:                           # no contains() as in Java String, this is how to check for it
+        print('\'Because\' is in \'Because the Night\'')
+    else:
+        print('\'Because\' is in \'Because the Night\'')
+    if song == 'Because the Night':                 # no equals(), this is how to compare strings for equal content
+        print('The song is \'Because the Night\'')
+    else:
+        print('The song is not \'Because the Night\'')
+    print('len():', len(song))
     # ...
 
