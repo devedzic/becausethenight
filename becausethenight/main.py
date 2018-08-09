@@ -34,9 +34,13 @@
 # from becausethenight.python.expressions import demonstrate_logical_operators
 # demonstrate_logical_operators()
 
-from becausethenight.python import strings
+# from becausethenight.python import strings
 
 # strings.demonstrate_formatting()
 # strings.demonstrate_fancy_formatting()
+# strings.demonstrate_string_operations()
 
-strings.demonstrate_string_operations()
+from becausethenight.python import lists
+
+# lists.demonstrate_lists()
+lists.demonstrate_list_methods()

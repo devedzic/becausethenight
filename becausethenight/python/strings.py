@@ -1,9 +1,10 @@
-# Demonstrates working with strings
+'''Demonstrates working with strings in Python'''
 
 import string
 
 
 def demonstrate_formatting():
+    '''Using classical formatting.'''
 
     print("%7.3f, %5s" % (4/3, 'ee'))
     print('I love \t\t\'Because the Night\'')
@@ -40,6 +41,8 @@ def demonstrate_formatting():
     print()
 
 def demonstrate_fancy_formatting():
+    '''Using "fancy" formatting.'''
+
     patti = "Patti Smith"
     # print('{0}, {1}, {2}'.format(patti, ': ', "Because the Night"))
     # print('{0} {1} {2}'.format(patti, ':', "Because the Night"))
@@ -47,6 +50,8 @@ def demonstrate_fancy_formatting():
     print('{0}{1} {2}, {3}'.format(patti, ':', "Because the Night", 1978))
 
 def demonstrate_string_operations():
+    '''Using different string operations.'''
+
     song = 'Because the Night'
     if song.endswith('Night'):
         print('Because the Night ends with \'Night\'')

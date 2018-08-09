@@ -1,6 +1,11 @@
-# The code moved here from the initial version of main.py and improved with   if __name__ == "__main__":
+"""The very first module in a more structured version of the project.
+The code moved here from the initial version of main.py
+and improved with   if __name__ == "__main__":
+"""
 
 def print_it():
+    """A simple function that demonstrates print()."""
+
     print("Because the Night")
     print()
     print('Because the night ' + '\n' + 'belongs to lovers')
@@ -34,4 +39,9 @@ if __name__ == "__main__":
     title = 'Because the Night'
     a = input('Enter the year of release of ' + title + ': ')
     print(title, 'was first released in', a)
+    print()
 
+    print(print_it.__doc__)                 # demonstrate printing docstrings
+    print()
+    print(__doc__)
+    print()
