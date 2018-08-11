@@ -43,4 +43,8 @@
 from becausethenight.python import lists
 
 # lists.demonstrate_lists()
-lists.demonstrate_list_methods()
+# lists.demonstrate_list_methods()
+# lists.demonstrate_arrays()
+# lists.populate_empty_list()
+# lists.duplicate_list()
+lists.demonstrate_list_comprehension()
