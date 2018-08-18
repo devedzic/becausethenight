@@ -52,7 +52,12 @@
 # tuples.demonstrate_packing()
 # tuples.demonstrate_zip()
 
-from becausethenight.python import sets
+# from becausethenight.python import sets
+# sets.demonstrate_sets()
 
-sets.demonstrate_sets()
+from becausethenight.python import dictionaries
+
+dictionaries.demonstrate_dictionaries()
+
+
 
