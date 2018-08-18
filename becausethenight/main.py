@@ -47,8 +47,12 @@
 # lists.duplicate_list()
 # lists.demonstrate_list_comprehension()
 
-from becausethenight.python import tuples
-
+# from becausethenight.python import tuples
 # tuples.demonstrate_tuples()
 # tuples.demonstrate_packing()
-tuples.demonstrate_zip()
+# tuples.demonstrate_zip()
+
+from becausethenight.python import sets
+
+sets.demonstrate_sets()
+
