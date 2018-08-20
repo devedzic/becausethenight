@@ -57,7 +57,7 @@
 
 from becausethenight.python import dictionaries
 
-dictionaries.demonstrate_dictionaries()
-
+# dictionaries.demonstrate_dictionaries()
+dictionaries.demonstrate_dict_sorting()
 
 
