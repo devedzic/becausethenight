@@ -40,6 +40,8 @@ def demonstrate_list_methods():
     print("A side:", songs)
 
     songs.remove("Ghost Dance")                                             # remove()
+                                                                            # alternatively: songs[3:4] = [],
+                                                                            # or del songs[3]
     print("After songs.remove(\"Ghost Dance\"):", songs)
 
     songs.pop()                                                             # pop()

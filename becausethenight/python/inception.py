@@ -33,7 +33,7 @@ if __name__ == "__main__":
     print("the Night")
     print()
 
-    print('%6.2f, %5d' %(4/3, 2))
+    print('%6.2f, %5d' % (4/3, 2))
     print()
 
     title = 'Because the Night'

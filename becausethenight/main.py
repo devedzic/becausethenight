@@ -55,9 +55,17 @@
 # from becausethenight.python import sets
 # sets.demonstrate_sets()
 
-from becausethenight.python import dictionaries
+# from becausethenight.python import dictionaries
+# dictionaries.demonstrate_dictionaries()
+# dictionaries.demonstrate_dict_sorting()
+
+# import becausethenight.python
+# print(list(becausethenight.python.__dict__))
+# print(tuple(becausethenight.python.__dict__))
+
+from becausethenight.python import statements
 
 # dictionaries.demonstrate_dictionaries()
-dictionaries.demonstrate_dict_sorting()
-
+# statements.demonstrate_branching()
+statements.demonstrate_loops()
 
