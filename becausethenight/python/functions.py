@@ -10,6 +10,8 @@ def demonstrate_annotations(artist: str, song: str = 'Because the Night') -> str
 
 def return_None():
     '''Demonstrates returning None and the pass statement.'''
+
+    # print(None)
     pass
 
 def show_song(artist, song ='Because the Night', duration = 180):
@@ -55,6 +57,12 @@ def use_all_categories_of_args(prompt, *albums, song = 'Because the Night', **au
                 print()
     print()
 
+def pass_function_as_parameter(f, *args):
+    '''Demonstrates using another function as a parameter. It works because functions are objects.'''
+
+    f(*args)
+
+
 if __name__ == "__main__":
 
     demonstration = demonstrate_annotations('Patti Smith', 'Because the Night')
@@ -88,3 +96,8 @@ if __name__ == "__main__":
     use_all_categories_of_args('Patti Smith\'s song', 'Easter', song='Till Victory',
                                author2='Patti Smith')
     use_all_categories_of_args('Patti Smith\'s song', song='Till Victory')
+
+    pass_function_as_parameter(return_None)         # function as a parameter: just the function's name, not ()!
+    pass_function_as_parameter(use_flexible_arg_list, "Just a prompt")
+    pass_function_as_parameter(demonstrate_annotations, 'Patti Smith', 'Because the Night')
+    print()
