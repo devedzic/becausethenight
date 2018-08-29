@@ -1,18 +1,20 @@
-'''Demonstrates pass, returning None, functions as parameters of other functions,
-functions as return values of other functions, user-defined and built-in decorators and lambdas'''
+"""Demonstrates pass, returning None, functions as parameters of other functions,
+functions as return values of other functions, user-defined and built-in decorators and lambdas"""
 
 
 from becausethenight.python import functions
+import functools
 
 
 def return_None():
-    '''Demonstrates returning None and the pass statement.'''
+    """Demonstrates returning None and the pass statement."""
 
     # print(None)
     pass
 
+
 def pass_function_as_parameter(f, *args):
-    '''Demonstrates using another function as a parameter. It works because functions are objects.'''
+    """Demonstrates using another function as a parameter. It works because functions are objects."""
 
     f(*args)
 
@@ -20,7 +22,9 @@ def pass_function_as_parameter(f, *args):
 #     name = full_name.split()
 #     return name
 
+
 def return_function(full_name, first_name_flag):
+    """Demonstrates using a function as the return value from another function."""
 
     name = full_name.split()
 
@@ -35,7 +39,10 @@ def return_function(full_name, first_name_flag):
     else:
         return return_family_name
 
+
 def return_function_with_args(*args):
+    """Demonstrates using a function as the return value from another function.
+    The returned function has parameters/arguments"""
 
     def return_empty():
         return []
@@ -48,9 +55,44 @@ def return_function_with_args(*args):
     else:
         return return_tuple
 
-def show_author(f):
-    def wrapper():
-        pass
+
+def show_author(artwork_f):
+    """Demonstrates how to develop a decorator. Uses the decorator-writing pattern:
+    import functools
+    def decorator(func):
+        @functools.wraps(func)			                # preserves func's identity after it's decorated
+        def wrapper_decorator(*args, **kwargs):
+            # Do something before
+            value = func(*args, **kwargs)
+            # Do something after
+            return value
+        return wrapper_decorator
+    """
+    @functools.wraps(artwork_f)
+    def wrapper(*args):
+        # Do something before
+        authors = list(args)
+        del authors[0]                                  # assuming the first arg is the song title
+        i = 0
+        for a in authors:                               # looks more compact wth an iterator
+            print(a, end='')
+            if i < (len(authors) - 1):
+                print(", ", end='')
+                i += 1
+            else:
+                print(': ', end='')
+        # Decorate artwork_f
+        decorated_artwork_f = artwork_f(*args)
+        # Do something after
+        print('--------------------------')
+        return decorated_artwork_f
+    return wrapper
+
+
+@show_author                                            # decorator; omit it if decorating manually (see at the end)
+def print_song(title, *authors):
+    print(title)
+
 
 if __name__ == '__main__':
 
@@ -79,4 +121,11 @@ if __name__ == '__main__':
     print('type(f):', type(f))
     f()
     print('f():', f())
+    print()
+
+    # print_song("Because the Night", "Patti Smith")
+    # print_song = show_author(print_song)              # decorate manually
+    print_song("Because the Night",
+               "Patti Smith",
+               "Bruce Springsteen")
     print()
