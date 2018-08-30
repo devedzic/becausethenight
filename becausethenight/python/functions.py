@@ -81,4 +81,14 @@ if __name__ == "__main__":
     use_all_categories_of_args('Patti Smith\'s song', 'Easter', song='Till Victory',
                                author2='Patti Smith')
     use_all_categories_of_args('Patti Smith\'s song', song='Till Victory')
+    print()
+                                                    # lambda examples
+    authors = ['Bruce Springsteen', 'Patti Smith']
+    sort_authors_reversed = lambda a: sorted(a, reverse=True)
+    # sort_authors_reversed = lambda a: print(sorted(a, reverse=True))
+    # sort_authors_reversed(authors)                # doesn't show anything, use print (either here or in lambda)
+    print(sort_authors_reversed(authors))
+    (lambda a: a.index('Patti Smith'))(authors)     # call a lambda without assignment (shows nothing)
+    print((lambda a: a.index('Patti Smith'))(authors))
+
 
