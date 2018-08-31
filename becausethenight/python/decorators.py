@@ -2,7 +2,6 @@
 functions as return values of other functions, user-defined and built-in decorators and lambdas"""
 
 
-from becausethenight.python import functions
 import functools
 
 
@@ -95,6 +94,8 @@ def print_song(title, *authors):
 
 
 if __name__ == '__main__':
+
+    from becausethenight.python import functions
 
     return_None()                                       # returning None
     print(return_None())
