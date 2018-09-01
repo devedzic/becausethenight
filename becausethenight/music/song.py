@@ -9,12 +9,12 @@ class Song:
     definition = "A single (and often standalone) work of music, " \
                  "typically intended to be sung by the human voice..."
 
-    def __init__(self, title='', performer=None, author=None, duration=0, releaseDate=None):
+    def __init__(self, title='', performer=None, author=None, duration=0, release_date=None):
         self.title = title
         self.performer = performer
         self.author = author
         self.duration = duration
-        self.releaseDate = releaseDate
+        self.release_date = release_date
 
     def __str__(self):
         return (self.title + '\n' +
@@ -23,7 +23,8 @@ class Song:
                 # '\t' + 'duration: ' + str(self.duration) + '\n' +
                 # '\t' + 'duration: ' + "%d:%02d" % divmod(self.duration, 60) + '\n' +
                 '\t' + 'duration: ' + format_duration(self.duration) + '\n' +
-                '\t' + 'released: ' + str(self.releaseDate))
+                # '\t' + 'released: ' + str(self.releaseDate))
+                '\t' + 'released: ' + format_date(self.release_date))
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
@@ -34,13 +35,28 @@ class Song:
             return False
 
     def play(self):
-        print('Playing:', self.author + ' - ', self.title + '...')
+        # print('Playing:', self.author + ' - ', self.title + '...')
+        print('Playing:', str(self.author) + ' -', self.title + '...')
 
 
 def format_duration(seconds):
-    """Converts song duration from seconds to string of the form <mm>:<ss>."""
+    """Converts a duration from seconds to string of the form '<mm>:<ss>'."""
 
-    return "%d:%02d" % divmod(seconds, 60)
+    if seconds > 0:
+        return "%d:%02d" % divmod(seconds, 60)
+    else:
+        return str(0)
+
+
+def format_date(a_date):
+    """Converts a date from datetime.date() to a string of the form '<month> <day>, <year>'."""
+
+    from datetime import date
+
+    if isinstance(a_date, date):
+        return a_date.strftime("%b %m, %Y")
+    else:
+        return 'unknown'
 
 
 if __name__ == "__main__":
@@ -50,9 +66,13 @@ if __name__ == "__main__":
     print()
 
     because_the_night = Song('Because the Night')       # creating objects and comparing them
-    becauseTheNight = Song('Because the Night')
+    becauseTheNight = Song('Because the Night',
+                           duration=333)
     print(because_the_night)
-    if because_the_night == becauseTheNight:            # True, since the contents of the two objects are the same
+    print(becauseTheNight)
+    print()
+
+    if because_the_night == becauseTheNight:            # True, since the contents (according to __eq__()) are the same
         print(True)
     else:
         print(False)
@@ -63,10 +83,14 @@ if __name__ == "__main__":
     print()
 
     becauseTheNight.album = "Easter"                    # adding a field to the object "on the fly"
-    print(becauseTheNight.album + ':', becauseTheNight.title)
+    print(becauseTheNight.album + ':',
+          becauseTheNight.title)
     if because_the_night == becauseTheNight:            # True; the class remains the same
         print(True)
     else:
         print(False)
+    print()
+
+    because_the_night.play()                            # run an instance method
     print()
 

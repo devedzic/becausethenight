@@ -34,9 +34,38 @@
 # from becausethenight.python.expressions import demonstrate_logical_operators
 # demonstrate_logical_operators()
 
-from becausethenight.python import strings
-
+# from becausethenight.python import strings
 # strings.demonstrate_formatting()
 # strings.demonstrate_fancy_formatting()
+# strings.demonstrate_string_operations()
 
-strings.demonstrate_string_operations()
+# from becausethenight.python import lists
+# lists.demonstrate_lists()
+# lists.demonstrate_list_methods()
+# lists.demonstrate_arrays()
+# lists.populate_empty_list()
+# lists.duplicate_list()
+# lists.demonstrate_list_comprehension()
+
+# from becausethenight.python import tuples
+# tuples.demonstrate_tuples()
+# tuples.demonstrate_packing()
+# tuples.demonstrate_zip()
+
+# from becausethenight.python import sets
+# sets.demonstrate_sets()
+
+# from becausethenight.python import dictionaries
+# dictionaries.demonstrate_dictionaries()
+# dictionaries.demonstrate_dict_sorting()
+
+# import becausethenight.python
+# print(list(becausethenight.python.__dict__))
+# print(tuple(becausethenight.python.__dict__))
+
+from becausethenight.python import statements
+
+# dictionaries.demonstrate_dictionaries()
+# statements.demonstrate_branching()
+statements.demonstrate_loops()
+
