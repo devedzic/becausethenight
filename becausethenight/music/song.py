@@ -1,10 +1,13 @@
 """Domain classes and functions related to the concept of song"""
 
 
+from becausethenight.util import utility
+
+
 class Song:
     """The class related to the concept of song.
     It is assumed that a song is sufficiently described by its
-    title, author, duration and release date."""
+    title, performer, author, duration and release date."""
 
     definition = "A single (and often standalone) work of music, " \
                  "typically intended to be sung by the human voice..."
@@ -18,13 +21,13 @@ class Song:
 
     def __str__(self):
         return (self.title + '\n' +
-                '\t' + 'performer(s): ' + str(self.performer) + '\n' +
-                '\t' + 'author(s): ' + str(self.author) + '\n' +
+                '\t' + 'performer(s): ' + utility.format_performer_type(self.performer) + '\n' +
+                '\t' + 'author(s): ' + utility.format_author(self.author) + '\n' +
                 # '\t' + 'duration: ' + str(self.duration) + '\n' +
                 # '\t' + 'duration: ' + "%d:%02d" % divmod(self.duration, 60) + '\n' +
-                '\t' + 'duration: ' + format_duration(self.duration) + '\n' +
+                '\t' + 'duration: ' + utility.format_duration(self.duration) + '\n' +
                 # '\t' + 'released: ' + str(self.releaseDate))
-                '\t' + 'released: ' + format_date(self.release_date))
+                '\t' + 'released: ' + utility.format_date(self.release_date))
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
@@ -36,27 +39,29 @@ class Song:
 
     def play(self):
         # print('Playing:', self.author + ' - ', self.title + '...')
-        print('Playing:', str(self.author) + ' -', self.title + '...')
+        # print('Playing:', str(self.author) + ' -', self.title + '...')
+        print('Playing:', utility.format_author(self.author) + ' -', self.title + '...')
 
+# The following functions have been moved to the utils.utility module:
 
-def format_duration(seconds):
-    """Converts a duration from seconds to string of the form '<mm>:<ss>'."""
-
-    if seconds > 0:
-        return "%d:%02d" % divmod(seconds, 60)
-    else:
-        return str(0)
-
-
-def format_date(a_date):
-    """Converts a date from datetime.date() to a string of the form '<month> <day>, <year>'."""
-
-    from datetime import date
-
-    if isinstance(a_date, date):
-        return a_date.strftime("%b %m, %Y")
-    else:
-        return 'unknown'
+# def format_duration(seconds):
+#     """Converts a duration from seconds to string of the form '<mm>:<ss>'."""
+#
+#     if seconds > 0:
+#         return "%d:%02d" % divmod(seconds, 60)
+#     else:
+#         return str(0)
+#
+#
+# def format_date(a_date):
+#     """Converts a date from datetime.date() to a string of the form '<month> <day>, <year>'."""
+#
+#     from datetime import date
+#
+#     if isinstance(a_date, date):
+#         return a_date.strftime("%b %m, %Y")
+#     else:
+#         return 'unknown'
 
 
 if __name__ == "__main__":
@@ -92,5 +97,19 @@ if __name__ == "__main__":
     print()
 
     because_the_night.play()                            # run an instance method
+    print()
+
+    from becausethenight.music.performer import Performer
+    from becausethenight.music.author import Author
+    from datetime import date
+
+    pattiSmithGroup = Performer("Patti Smith Group", band=True)
+    bruce_and_patti = Author("Bruce Springsteen, Patti Smith")
+    because_the_night = Song("Because the Night",
+                             performer=pattiSmithGroup,
+                             author=bruce_and_patti,
+                             duration=333,
+                             release_date=date(1978, 3, 2))
+    print(because_the_night)
     print()
 
