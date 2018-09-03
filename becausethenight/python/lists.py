@@ -44,8 +44,8 @@ def demonstrate_list_methods():
                                                                             # or del songs[3]
     print("After songs.remove(\"Ghost Dance\"):", songs)
 
-    songs.pop()                                                             # pop()
-    print("After songs.pop():", songs)
+    last_song = songs.pop()                                                 # pop()
+    print("After songs.pop():", songs, '(the song removed:', last_song +')')
     songs.pop(1)
     print("After songs.pop():", songs)
 
@@ -53,6 +53,12 @@ def demonstrate_list_methods():
     print("Just the first three songs:", songs)
     songs.extend(['Ghost Dance', 'Babelogue', 'Rock \'n\' Roll Nigger'])
     print("After songs.extend(['Ghost Dance', 'Babelogue', 'Rock \'n\' Roll Nigger']) (A side):", songs)
+
+    songs = ["Till Victory"]
+    print("Just the first song:", songs)
+    songs.append(["Space Monkey", "Because the Night"])
+    print("After songs.append(['Space Monkey', 'Because the Night']):")
+    print('\t', songs)
 
 def demonstrate_arrays():
     '''Using array.array() to build list-based numeric arrays.'''
@@ -88,6 +94,12 @@ def duplicate_list():
     listB = listA + []                                      # this creates a new list, effectively the same as listA
     print('id(listA):',
           str(id(listA)) + '; id(listB):', id(listB))
+    listC = listA.copy()                                    # this also creates a new list (a copy of listA)
+    print('id(listA):',
+          str(id(listA)) + '; id(listC):', id(listC))
+    listD = listA[:]                                        # this also creates a new list (a copy of listA)
+    print('id(listA):',
+          str(id(listA)) + '; id(listD):', id(listD))
 
 def demonstrate_list_comprehension():
     '''Showing examples of list comprehension.'''
@@ -105,3 +117,8 @@ def demonstrate_list_comprehension():
     print(first_words)
     print('join:', ''.join(first_words))                                    # make a big string from all first_words[i]
     print()
+
+    # songs = ["Till Victory", "Space Monkey", "Because the Night"]
+    # first_words = [word for song in songs for word in song.split()]         # another list comprehension
+    # print(first_words)
+    # print()
