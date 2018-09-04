@@ -39,13 +39,13 @@
 # strings.demonstrate_fancy_formatting()
 # strings.demonstrate_string_operations()
 
-from becausethenight.python import lists
+# from becausethenight.python import lists
 # lists.demonstrate_lists()
 # lists.demonstrate_list_methods()
 # lists.demonstrate_arrays()
 # lists.populate_empty_list()
 # lists.duplicate_list()
-lists.demonstrate_list_comprehension()
+# lists.demonstrate_list_comprehension()
 
 # from becausethenight.python import tuples
 # tuples.demonstrate_tuples()
@@ -63,8 +63,7 @@ lists.demonstrate_list_comprehension()
 # print(list(becausethenight.python.__dict__))
 # print(tuple(becausethenight.python.__dict__))
 
-# from becausethenight.python import statements
-# dictionaries.demonstrate_dictionaries()
-# statements.demonstrate_branching()
+from becausethenight.python import statements
+statements.demonstrate_branching()
 # statements.demonstrate_loops()
 

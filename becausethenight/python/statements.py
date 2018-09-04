@@ -7,6 +7,7 @@ def demonstrate_branching():
     because_the_night = 'Because the Night'
     because_the_Night = 'Because the Night'                 # id()'s are the same for equal strings!
                                                             # (but not for lists, user class instances,...)
+                                                            # (not even for strings if this is run in Python console!)
     print('because_the_night:', because_the_night + '; id(because_the_night):', id(because_the_night))
     print('because_the_Night:', because_the_Night + '; id(because_the_Night):', id(because_the_Night))
     print()

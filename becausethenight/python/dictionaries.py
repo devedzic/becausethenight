@@ -55,6 +55,21 @@ def sort_dictionary(d, by):
         d_sorted = sorted(zip(d.values(), d.keys()))
     else:
         return None
+    # Alternative 1:
+    # from operator import itemgetter
+    # if by == 'k':
+    #     d_sorted = sorted(d.items(), key=itemgetter(0))
+    # elif by == 'v':
+    #     d_sorted = sorted(d.items(), key=itemgetter(1))
+    # else:
+    #     return None
+    # Alternative 2:
+    # if by == 'k':
+    #     d_sorted = sorted(d.items(), key=lambda item:item[0])
+    # elif by == 'v':
+    #     d_sorted = sorted(d.items(), key=lambda item:item[1])
+    # else:
+    #     return None
     return d_sorted
 
 def demonstrate_dict_sorting():
