@@ -64,6 +64,6 @@
 # print(tuple(becausethenight.python.__dict__))
 
 from becausethenight.python import statements
-statements.demonstrate_branching()
-# statements.demonstrate_loops()
+# statements.demonstrate_branching()
+statements.demonstrate_loops()
 

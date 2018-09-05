@@ -63,21 +63,28 @@ def demonstrate_loops():
         print(str(i+1) + ':', song)
     print()
 
-    other_songs = ["Till Victory", "Space Monkey", "Rock 'n' Roll Nigger", "Ghost Dance"]
+    other_songs = ["Till Victory",
+                   "Space Monkey",
+                   "Rock 'n' Roll Nigger",
+                   "Ghost Dance"]
     for song in songs:
         if song in other_songs:
             continue                                # continue
         print(song)
-    print()
-    for song in songs:
-        if song == "Rock 'n' Roll Nigger":
-            break                                   # break
-        print(song)
+    # Alternatively
+    # selected_songs = [song for song in songs if song not in other_songs]
+    # print(', '.join(selected_songs))
     print()
 
-    i = 0                                           # while loop
-    while songs[i] != 'Because the Night':
-        print(songs[i])
-        i += 1
-    print()
+    # for song in songs:
+    #     if song == "Rock 'n' Roll Nigger":
+    #         break                                   # break
+    #     print(song)
+    # print()
+    #
+    # i = 0                                           # while loop
+    # while songs[i] != 'Because the Night':
+    #     print(songs[i])
+    #     i += 1
+    # print()
 

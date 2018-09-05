@@ -46,10 +46,10 @@ def return_function_with_args(*args):
     def return_empty():
         return []
 
-    def return_tuple(*args):                            # '*' is important here; without it, args is a positional arg!
-        return tuple(args)
+    def return_tuple(*parameters):                      # '*' is important here; without it, args is a positional arg!
+        return tuple(parameters)
 
-    if len(list(args)) == 0:
+    if len(args) == 0:
         return return_empty
     else:
         return return_tuple
@@ -80,6 +80,14 @@ def show_author(artwork_f):
                 i += 1
             else:
                 print(': ', end='')
+        # Alternatively:
+        # for i, a in enumerate(authors):
+        #     print(a, end='')
+        #     if i < (len(authors) - 1):
+        #         print(", ", end='')
+        #     else:
+        #         print(': ', end='')
+
         # Decorate artwork_f
         decorated_artwork_f = artwork_f(*args)
         # Do something after
@@ -120,8 +128,8 @@ if __name__ == '__main__':
     f = return_function_with_args('Patti Smith', True)
     print('f:', f)
     print('type(f):', type(f))
-    f()
-    print('f():', f())
+    f('Patti Smith', 'Bruce Springsteen', True)
+    print('f():', f('Patti Smith', 'Bruce Springsteen', True))
     print()
 
     # print_song("Because the Night", "Patti Smith")

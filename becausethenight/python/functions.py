@@ -32,23 +32,27 @@ def use_all_categories_of_args(prompt, *albums, song = 'Because the Night', **au
     print(prompt + ': ', end='')
     if len(albums) != 0:
         print('Album(s):', end=' ')
-        for album in albums:
-            print(album, end='')
-            if album != albums[-1]:                         # if it's not the last album in albums
-                print(', ', end='')
-            else:
-                print('; ', end='')
+        print(", ".join(albums), end='')
+        print('; ', end='')
+        # Alternatively:
+        # for album in albums:
+        #     print(album, end='')
+        #     if album != albums[-1]:                       # if it's not the last album in albums
+        #         print(', ', end='')
+        #     else:
+        #         print('; ', end='')
         print('Song:', song, end='')
     else:
         print(song)
     if authors != {}:
         print('; Author(s):', end=' ')
-        for key in authors:
-            print(authors[key], end='')
-            if key != list(authors.keys())[-1]:             # if it's not the last author
-                print(', ', end='')
-            else:
-                print()
+        print(", ".join([v for k, v in authors.items()]))
+        # for key in authors:
+        #     print(authors[key], end='')
+        #     if key != list(authors.keys())[-1]:           # if it's not the last author
+        #         print(', ', end='')
+        #     else:
+        #         print()
     print()
 
 
@@ -84,11 +88,19 @@ if __name__ == "__main__":
     print()
                                                     # lambda examples
     authors = ['Bruce Springsteen', 'Patti Smith']
-    sort_authors_reversed = lambda a: sorted(a, reverse=True)
-    # sort_authors_reversed = lambda a: print(sorted(a, reverse=True))
+    sort_authors_reversed = \
+        lambda a: sorted(a, reverse=True)
+    # sort_authors_reversed = \
+    #     lambda a: print(sorted(a, reverse=True))
     # sort_authors_reversed(authors)                # doesn't show anything, use print (either here or in lambda)
     print(sort_authors_reversed(authors))
     (lambda a: a.index('Patti Smith'))(authors)     # call a lambda without assignment (shows nothing)
-    print((lambda a: a.index('Patti Smith'))(authors))
+    print((lambda
+               a: a.index('Patti Smith'))(authors))
+    print(sorted(authors,                           # a more realistic example of using lambda:
+                 key=lambda                         # sort the authors list based on the authors' surname,
+                     x: x.split()[1].lower()))      # and do it in case-insensitive manner
+
+
 
 
