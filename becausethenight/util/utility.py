@@ -67,20 +67,22 @@ def format_performer(performer):
         return 'unknown'
 
 
-def format_performer_type(band):
+def format_performer_type(performer):
     """Converts the flag of performer type from boolean to string, if needed."""
 
-    if isinstance(band, bool):
-        return 'band' if band else 'musician'
+    from becausethenight.music.performer import Performer
+
+    if isinstance(performer, Performer):
+        return performer.name + ' (band)' if performer.is_band else ' (musician)'
     else:
         return 'unknown if band or musician'
 
     # Alternatively:
-    # if isinstance(band, bool):
-    #     if band:
-    #         return 'band'
+    # if isinstance(performer, Performer):
+    #     if performer.is_band:
+    #         return performer.name + ' (band)'
     #     else:
-    #         return 'musician'
+    #         return performer.name + ' (musician)'
     # else:
     #     return 'unknown if band or musician'
 

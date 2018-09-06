@@ -16,7 +16,8 @@ class Performer:
         self.is_band = is_band
 
     def __str__(self):
-        return str(self.name) + ', ' + utility.format_performer_type(self.is_band)
+        # return self.name + ', ' + utility.format_performer_type(self.is_band)
+        return utility.format_performer_type(self)
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
