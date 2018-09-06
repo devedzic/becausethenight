@@ -11,17 +11,17 @@ class Performer:
 
     definition = "An artist in the performing arts. In this project, they perform music."
 
-    def __init__(self, name, band=False):
+    def __init__(self, name, is_band=False):
         self.name = name
-        self.band = band
+        self.is_band = is_band
 
     def __str__(self):
-        return str(self.name) + ', ' + utility.format_performer_type(self.band)
+        return str(self.name) + ', ' + utility.format_performer_type(self.is_band)
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
             return False
-        if (self.name == other.name) and (self.band == other.band):
+        if (self.name == other.name) and (self.is_band == other.is_band):
             return True
         else:
             return False
@@ -29,15 +29,13 @@ class Performer:
 
 if __name__ == "__main__":
 
-    from datetime import date
-
     bruceSpringsteen = Performer('Bruce Springsteen',
-                                 band=False)
+                                 is_band=False)
     print(bruceSpringsteen)                             # test __str__()
     print()
 
     bruce = Performer('Bruce Springsteen',
-                      band=False)
+                      is_band=False)
     if bruceSpringsteen == bruce:                       # test __eq__()
         print(True)
     else:

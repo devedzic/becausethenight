@@ -103,7 +103,7 @@ if __name__ == "__main__":
     from becausethenight.music.author import Author
     from datetime import date
 
-    pattiSmithGroup = Performer("Patti Smith Group", band=True)
+    pattiSmithGroup = Performer("Patti Smith Group", is_band=True)
     bruce_and_patti = Author("Bruce Springsteen, Patti Smith")
     because_the_night = Song("Because the Night",
                              performer=pattiSmithGroup,

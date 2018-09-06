@@ -28,17 +28,25 @@ def alive_or_deceased(alive):
     """Converts the status of being alive or deceased from boolean to string."""
 
     if isinstance(alive, bool):
-        if alive:
-            return 'alive'
-        else:
-            return 'deceased'
+        return 'alive' if alive else 'deceased'
     elif isinstance(alive, Lives):
-        if alive == Lives.ALIVE:
-            return 'alive'
-        else:
-            return 'deceased'
+        return 'alive' if alive == Lives.ALIVE else 'deceased'
     else:
         return 'Alive/Deceased: unknown'
+
+    # Alternatively:
+    # if isinstance(alive, bool):
+    #     if alive:
+    #         return 'alive'
+    #     else:
+    #         return 'deceased'
+    # elif isinstance(alive, Lives):
+    #     if alive == Lives.ALIVE:
+    #         return 'alive'
+    #     else:
+    #         return 'deceased'
+    # else:
+    #     return 'Alive/Deceased: unknown'
 
 
 class Lives(Enum):
@@ -63,12 +71,18 @@ def format_performer_type(band):
     """Converts the flag of performer type from boolean to string, if needed."""
 
     if isinstance(band, bool):
-        if band:
-            return 'band'
-        else:
-            return 'musician'
+        return 'band' if band else 'musician'
     else:
         return 'unknown if band or musician'
+
+    # Alternatively:
+    # if isinstance(band, bool):
+    #     if band:
+    #         return 'band'
+    #     else:
+    #         return 'musician'
+    # else:
+    #     return 'unknown if band or musician'
 
 
 def format_author(author):
