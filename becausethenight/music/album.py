@@ -5,7 +5,7 @@ from becausethenight.util import utility
 
 
 class Album:
-    """The class related to the concept of album.
+    """The class describing the concept of album.
     It is assumed that an album is sufficiently described by its
     title, performer, duration and release date."""
 

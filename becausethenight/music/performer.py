@@ -5,7 +5,7 @@ from becausethenight.util import utility
 
 
 class Performer:
-    """The class related to the concept of performer.
+    """The class describing the concept of performer.
     It is assumed that a performer is sufficiently described by their
     name and whether it is a solo performer or a band."""
 

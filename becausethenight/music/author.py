@@ -1,11 +1,41 @@
 """Domain classes and functions related to the concept of author"""
 
 
+from enum import Enum
 from becausethenight.util import utility
 
 
+class Genre(Enum):
+    """The enum indicating the music genres that the music package accepts."""
+
+    ROCK = 1
+    BLUES = 2
+    SOUL = 3
+    INDIE = 4
+    ACOUSTIC = 5
+
+
+class Instrument(Enum):
+    """The enum indicating the instruments that the music package accepts."""
+
+    GUITAR = 1
+    VOCALS = 2
+    PIANO = 3
+    BASS = 4
+    DRUMS = 5
+    MULTIPLE_INSTRUMENTS = 6
+
+
+class PoetryType(Enum):
+    """The enum indicating the poetry types that the music package accepts."""
+
+    LYRIC = 1
+    EPIC = 2
+    DRAMATIC = 3
+
+
 class Author:
-    """The class related to the concept of author.
+    """The class describing the concept of author.
     It is assumed that an author is sufficiently described by his/her
     name, age, birth date, birth place, nationality, and whether he/she is still living or is deceased."""
 
@@ -34,6 +64,67 @@ class Author:
             return True
         else:
             return False
+
+
+class Musician(Author):
+    """The class describing the concept of musician.
+    It is assumed that a musician is sufficiently described as an Author, with addition of his/her
+    music genre and instrument(s)."""
+
+    definition = "A person who composes, conducts, or performs music."
+
+    def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
+                 genre=Genre.ROCK, instrument=Instrument.GUITAR):
+        super().__init__(name, age, birth_date, birth_place, nationality, alive)
+        self.genre = genre
+        self.instrument = instrument
+
+    def __str__(self):
+        return (super().__str__() + '\n' +
+                '\t' + 'genre: ' + self.genre.name.lower() + '\n' +
+                '\t' + 'instrument(s): ' + self.instrument.name.lower())
+
+    def __eq__(self, other):
+        return super().__eq__(other)
+
+
+class Poet(Author):
+    """The class describing the concept of poet.
+    It is assumed that a poet is sufficiently described as an Author,
+    with addition of the type of poetry they create."""
+
+    definition = "A person who creates poetry."
+
+    def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
+                 poetry=PoetryType.LYRIC):
+        super().__init__(name, age, birth_date, birth_place, nationality, alive)
+        self.poetry = poetry
+
+    def __str__(self):
+        return (super().__str__() + '\n' +
+                '\t' + 'poetry: ' + self.poetry.name.lower())
+
+    def __eq__(self, other):
+        return super().__eq__(other)
+
+
+class SingerSongwriter(Musician, Poet):
+    """The class describing the concept of poet.
+    It is assumed that a poet is sufficiently described as a Musician who is simultaneously a Poet."""
+
+    definition = "A musician who writes, composes, and performs their own musical material (both lyrics and melodies)."
+
+    def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
+                 genre=Genre.ROCK, instrument=Instrument.GUITAR, poetry=PoetryType.LYRIC):
+        Poet.__init__(self, name, poetry=poetry)
+        Musician.__init__(self, name, age, birth_date, birth_place, nationality, alive, genre, instrument)
+
+    def __str__(self):
+        return (Musician.__str__(self) + '\n' +
+                '\t' + 'poetry: ' + self.poetry.name.lower())
+
+    def __eq__(self, other):
+        return super().__eq__(other)
 
 
 # The following functions have been moved to the utils.utility module:
@@ -65,16 +156,39 @@ if __name__ == "__main__":
                               'Freehold',
                               'US',
                               utility.Lives.ALIVE)
-    print(bruceSpringsteen)                             # test __str__()
+    print(bruceSpringsteen)                                                 # test __str__()
     print()
 
     bruce = Author('Bruce Springsteen',
                    birth_date=date(1949, 9, 23))
-    if bruceSpringsteen == bruce:                       # test __eq__()
+    if bruceSpringsteen == bruce:                                           # test __eq__()
         print(True)
     else:
         print(False)
     print()
 
+    lennyKaye = Musician('Lenny Kaye', 70,                                  # test Musician
+                         date(1948, 2, 21),
+                         'New York City', 'US')
+    print(lennyKaye)
 
+    lenny = Musician('Lenny Kaye', 70,
+                     date(1948, 2, 21))
+    if lennyKaye == lenny:
+        print('eq')
+    else:
+        print('not eq')
+    print()
+
+    edgarAllanPoe = Poet('Edgar Allan Poe', -1,                             # test Poet
+                         date(1809, 1, 19),
+                         'Boston', 'US', False)
+    print(edgarAllanPoe)
+    print()
+
+    jonathanWilson = SingerSongwriter('Jonathan Wilson', 50,                # test SingerSongwriter (mult. inheritance)
+                                      date(1968, 5, 29),
+                                      'Boston', 'US', False)
+    print(jonathanWilson)
+    print()
 

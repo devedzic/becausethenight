@@ -5,7 +5,7 @@ from becausethenight.util import utility
 
 
 class Song:
-    """The class related to the concept of song.
+    """The class describing the concept of song.
     It is assumed that a song is sufficiently described by its
     title, performer, author, duration and release date."""
 

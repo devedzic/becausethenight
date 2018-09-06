@@ -1,4 +1,4 @@
-"""Utility functions"""
+"""Utility functions of the package music"""
 
 
 from enum import Enum
@@ -50,7 +50,7 @@ def alive_or_deceased(alive):
 
 
 class Lives(Enum):
-    """The enum indicated the status of being alive or deceased."""
+    """The enum indicating the status of being alive or deceased."""
 
     ALIVE = 1
     DECEASED = 2
