@@ -68,14 +68,6 @@ class Author:
         else:
             self.__name == 'unknown'
 
-    @staticmethod
-    def show_generic_definition():
-        print(Author.definition)
-
-    @classmethod
-    def show_definition(cls):
-        print(cls.definition)
-
     def __str__(self):
         return (str(self.__name) + '\n' +
                 '\t' + 'age: ' + str(self.age) + '\n' +
@@ -91,6 +83,21 @@ class Author:
             return True
         else:
             return False
+
+    @staticmethod
+    def show_generic_definition():
+        print(Author.definition)
+
+    @classmethod
+    def show_definition(cls):
+        print(cls.definition)
+
+    @classmethod
+    def get_instance(cls, name):                            # alternative constructor
+        if isinstance(name, str):
+            return cls(name)
+        else:
+            return cls('unknown')
 
 
 class Musician(Author):
@@ -250,4 +257,8 @@ if __name__ == "__main__":
     Author.show_definition()
     print('Classmethod called from subclass: ', end='')
     Poet.show_definition()
+    print()
+
+    townesVanZandt = Musician.get_instance('Townes Van Zandt')              # test alternative constructor
+    print(townesVanZandt)
     print()
