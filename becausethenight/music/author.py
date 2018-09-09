@@ -224,13 +224,30 @@ if __name__ == "__main__":
     print(edgarAllanPoe.name)
     print()
 
-    print('Just print static field:', edgarAllanPoe.definition)             # test static field
-    print('Staticmethod: ', end='')                                         # test staticmethod
+    print('Just print static field:', edgarAllanPoe.definition)             # test static field/attribute
+    edgarAllanPoe.definition = "An artist who creates poetry."
+    print('Just print modified static field:', edgarAllanPoe.definition)    # show edgarAllanPoe fields in debugger
+    print('Print modified static field from class:', Poet.definition)       # show Poet fields in debugger
+    Poet.definition = "An artist who creates poetry."                       # modify static field from the class level
+    print('Print modified static field again:', edgarAllanPoe.definition)
+    print()
+
+    print('Staticmethod called from a base class instance: ', end='')       # test staticmethod
+    bruceSpringsteen.show_generic_definition()
+    print('Staticmethod called from a subclass instance: ', end='')
     edgarAllanPoe.show_generic_definition()
-    print('Poet.show_generic_definition(): ', end='')
+    print('Staticmethod called from base class: ', end='')
+    Author.show_generic_definition()
+    print('Staticmethod called from subclass: ', end='')
     Poet.show_generic_definition()
-    print('Classmethod: ', end='')                                          # test classmethod
+    print()
+
+    print('Classmethod called from a base class instance: ', end='')        # test classmethod
+    bruceSpringsteen.show_definition()
+    print('Classmethod called from a subclass instance: ', end='')
     edgarAllanPoe.show_definition()
-    print('Poet.show_definition(): ', end='')
+    print('Classmethod called from base class: ', end='')
+    Author.show_definition()
+    print('Classmethod called from subclass: ', end='')
     Poet.show_definition()
     print()
