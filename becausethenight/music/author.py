@@ -41,16 +41,43 @@ class Author:
 
     definition = "Creator or originator of an artwork."
 
+    # def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True):
+    #     self.name = name
+    #     self.age = age
+    #     self.birth_date = birth_date
+    #     self.birth_place = birth_place
+    #     self.nationality = nationality
+    #     self.alive = alive
+
     def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True):
-        self.name = name
+        self.__name = name
         self.age = age
         self.birth_date = birth_date
         self.birth_place = birth_place
         self.nationality = nationality
         self.alive = alive
 
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        if isinstance(name, str):
+            self.__name = name
+        else:
+            self.__name == 'unknown'
+
+    @staticmethod
+    def show_generic_definition():
+        print(Author.definition)
+
+    @classmethod
+    def show_definition(cls):
+        print(cls.definition)
+
     def __str__(self):
-        return (str(self.name) + '\n' +
+        return (str(self.__name) + '\n' +
                 '\t' + 'age: ' + str(self.age) + '\n' +
                 '\t' + 'born: ' + utility.format_date(self.birth_date) + '\n' +
                 '\t' + 'place of birth: ' + str(self.birth_place) + '\n' +
@@ -60,7 +87,7 @@ class Author:
     def __eq__(self, other):
         if self.__class__ != other.__class__:
             return False
-        if (self.name == other.name) and (self.birth_date == other.birth_date):
+        if (self.__name == other.name) and (self.birth_date == other.birth_date):
             return True
         else:
             return False
@@ -192,3 +219,18 @@ if __name__ == "__main__":
     print(jonathanWilson)
     print()
 
+    print(edgarAllanPoe.name)                                               # test name property (step through code)
+    edgarAllanPoe.name = 'E. A. Poe'
+    print(edgarAllanPoe.name)
+    print()
+
+    print('Just print static field:', edgarAllanPoe.definition)             # test static field
+    print('Staticmethod: ', end='')                                         # test staticmethod
+    edgarAllanPoe.show_generic_definition()
+    print('Poet.show_generic_definition(): ', end='')
+    Poet.show_generic_definition()
+    print('Classmethod: ', end='')                                          # test classmethod
+    edgarAllanPoe.show_definition()
+    print('Poet.show_definition(): ', end='')
+    Poet.show_definition()
+    print()
