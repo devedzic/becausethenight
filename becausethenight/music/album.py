@@ -60,7 +60,7 @@ class SongNotIncludedError(AlbumError):
     def __init__(self, song, album):
         self.song = song
         self.album = album
-        self.message = "Song \'{}\' not included on album \'{}\'".format(song.title, album.title)
+        self.message = "SongNotIncludedError: song \'{}\' not included on album \'{}\'".format(song.title, album.title)
 
 
 def play_song(song, album):
