@@ -232,10 +232,12 @@ if __name__ == "__main__":
             print("Executing the else clause...")
     print()
 
+    import sys
     dancing_barefoot = Song('Dancing Barefoot')                 # demonstrate catching user-defined exception
     # play_song(dancing_barefoot, easter)
     try:
         play_song(dancing_barefoot, easter)
     except SongNotIncludedError as err:
         print(err.message)
+        # sys.stderr.write(err.message)                         # does not produce any output in PyCharm; a bug?
     print()
