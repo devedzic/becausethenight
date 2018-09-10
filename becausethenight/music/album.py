@@ -218,6 +218,20 @@ if __name__ == "__main__":
             break
     print()
 
+    for i in range(5):                                          # demonstrate else clause (must be after all except's)
+        try:
+            print(songs[i])
+        except IndexError as err:
+            print("Exception:", err.args[0], "(i = " + str(i) + ").")
+            break
+        except Exception as err:
+            # print("Exception:", err.args[0])
+            print(type(err).__name__ + ':', err.args[0])
+            break
+        else:
+            print("Executing the else clause...")
+    print()
+
     dancing_barefoot = Song('Dancing Barefoot')                 # demonstrate catching user-defined exception
     # play_song(dancing_barefoot, easter)
     try:
