@@ -47,6 +47,31 @@ class Album:
             raise StopIteration
 
 
+class AlbumError(Exception):
+    """Base class for exceptions in this module."""
+
+    pass
+
+
+class SongNotIncludedError(AlbumError):
+    """Exception raised when a song from an album is requested,
+    but is not included in the list of songs from that album."""
+
+    def __init__(self, song, album):
+        self.song = song
+        self.album = album
+        self.message = "Song \'{}\' not included on album \'{}\'".format(song.title, album.title)
+
+
+def play_song(song, album):
+    """Play the requested song from the album."""
+
+    if song in album.songs:
+        print(song)
+    else:
+        raise SongNotIncludedError(song, album)
+
+
 def format_songs(songs):
     """Formats the album's song list for __str__()."""
 
@@ -57,6 +82,8 @@ def format_songs(songs):
 
 
 def generate_songs(songs):
+    """A generator of Song objects, given the input list of songs."""
+
     i = 0
     while i < len(songs):
         yield songs[i]
@@ -149,3 +176,52 @@ if __name__ == "__main__":
     print("Songs on the 'Easter' album:")
     for song in generate_songs(easter.songs):
         print(song)
+    print()
+
+    for i in range(5):                                          # demonstrate catching exceptions
+        try:
+            print(songs[i])
+        # except IndexError:
+        #     print("Exception: index out of bounds.")
+        #     break
+        # except IndexError as err:
+        #     # print("Exception:", err.args, "(i = " + str(i) + ").")
+        #     print("Exception:", err.args[0], "(i = " + str(i) + ").")
+        #     break
+        except IndexError as err:
+            print("Exception:", err.args[0], "(i = " + str(i) + ").")
+            break
+    print()
+
+    for i in range(2):                                          # demonstrate catching multiple exceptions and finally
+        try:
+            print(songs[i])
+            print(songs[i] / 4)
+            print("Whatever...")
+        except IndexError as err:
+            print("Exception:", err.args[0], "(i = " + str(i) + ").")
+            break
+        except Exception as err:
+            # print("Exception:", err.args[0])
+            print(type(err).__name__ + ':', err.args[0])
+            break
+        finally:
+            print("Stopped printing songs.")
+    print()
+
+    for i in range(5):                                          # demonstrate catching "any" exception
+        try:
+            print(songs[i])
+            print(songs[i] / 4)
+        except:
+            print("Caught an exception...")
+            break
+    print()
+
+    dancing_barefoot = Song('Dancing Barefoot')                 # demonstrate catching user-defined exception
+    # play_song(dancing_barefoot, easter)
+    try:
+        play_song(dancing_barefoot, easter)
+    except SongNotIncludedError as err:
+        print(err.message)
+    print()
