@@ -113,3 +113,25 @@ if __name__ == "__main__":
     print(because_the_night)
     print()
 
+    # print('Writing to a text file...')                  # demonstrate writing to a text file
+    # with open('because_the_night.txt', 'w') as outfile:
+    #     outfile.write(str(because_the_night))
+    # print()
+    #
+    # print('Reading from a text file...')                # demonstrate reading from a text file
+    # with open('because_the_night.txt', 'r') as infile:
+    #     s = infile.read()
+    # print(s)
+    # print()
+
+    print('Writing to a binary file...')                # demonstrate writing to a binary file
+    with open('because_the_night.txt', 'wb') as outfile:
+        outfile.write(str.encode(str(because_the_night)))
+    print()
+
+    print('Reading from a text file...')                # demonstrate reading from a binary file
+    with open('because_the_night.txt', 'rb') as infile:
+        s = infile.read()
+    print(s)
+    print()
+
