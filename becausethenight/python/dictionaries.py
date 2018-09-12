@@ -21,6 +21,10 @@ def demonstrate_dictionaries():
     for k, v in because_the_night.items():
         print(k + ': ', v)
     print()
+
+    from pprint import pprint                                   # pprint dictionary in one column
+    pprint(because_the_night, width=1)
+    print()
                                                                 # using keys() and values() functions
     print(because_the_night.keys())
     print(because_the_night.values())
