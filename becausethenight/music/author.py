@@ -99,6 +99,19 @@ class Author:
         else:
             return cls('unknown')
 
+    def py_to_json(self):
+        d = self.__dict__
+        return d
+        # if d[self.__dict__['name']:
+
+
+    # def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True):
+    #     self.__name = name
+    #     self.age = age
+    #     self.birth_date = birth_date
+    #     self.birth_place = birth_place
+    #     self.nationality = nationality
+    #     self.alive = alive
 
 class Musician(Author):
     """The class describing the concept of musician.
@@ -262,3 +275,6 @@ if __name__ == "__main__":
     townesVanZandt = Musician.get_instance('Townes Van Zandt')              # test alternative constructor
     print(townesVanZandt)
     print()
+
+    print(bruceSpringsteen.py_to_json())
+

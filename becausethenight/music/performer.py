@@ -3,6 +3,8 @@
 
 from becausethenight.util import utility
 
+import json
+
 
 class Performer:
     """The class describing the concept of performer.
@@ -27,20 +29,36 @@ class Performer:
         else:
             return False
 
+    def py_to_json(self):
+        # return self.__dict__
+        return json.dumps(self.__dict__)
+
+    @staticmethod
+    def json_to_py(json_performer):
+        return json.loads(json_performer)
+
 
 if __name__ == "__main__":
 
     bruceSpringsteen = Performer('Bruce Springsteen',
                                  is_band=False)
-    print(bruceSpringsteen)                             # test __str__()
+    print(bruceSpringsteen)                                 # test __str__()
     print()
 
     bruce = Performer('Bruce Springsteen',
                       is_band=False)
-    if bruceSpringsteen == bruce:                       # test __eq__()
+    if bruceSpringsteen == bruce:                           # test __eq__()
         print(True)
     else:
         print(False)
+    print()
+
+    bruceSpringsteen_json = bruceSpringsteen.py_to_json()   # test JSON serialization/deserialization
+    print('bruceSpringsteen.py_to_json():',
+          bruceSpringsteen_json)
+    bruceSpringsteen_py = \
+        Performer.json_to_py(bruceSpringsteen_json)
+    print(bruceSpringsteen_py)
     print()
 
 
