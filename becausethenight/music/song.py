@@ -2,6 +2,7 @@
 
 
 from becausethenight.util import utility
+from becausethenight.music import performer, author
 
 
 class Song:
@@ -21,8 +22,8 @@ class Song:
 
     def __str__(self):
         return (self.title + '\n' +
-                '\t' + 'performer(s): ' + utility.format_performer_type(self.performer) + '\n' +
-                '\t' + 'author(s): ' + utility.format_author(self.author) + '\n' +
+                '\t' + 'performer(s): ' + performer.format_performer_type(self.performer) + '\n' +
+                '\t' + 'author(s): ' + author.format_author(self.author) + '\n' +
                 # '\t' + 'duration: ' + str(self.duration) + '\n' +
                 # '\t' + 'duration: ' + "%d:%02d" % divmod(self.duration, 60) + '\n' +
                 '\t' + 'duration: ' + utility.format_duration(self.duration) + '\n' +
@@ -40,7 +41,7 @@ class Song:
     def play(self):
         # print('Playing:', self.author + ' - ', self.title + '...')
         # print('Playing:', str(self.author) + ' -', self.title + '...')
-        print('Playing:', utility.format_author(self.author) + ' -', self.title + '...')
+        print('Playing:', author.format_author(self.author) + ' -', self.title + '...')
 
 # The following functions have been moved to the utils.utility module:
 

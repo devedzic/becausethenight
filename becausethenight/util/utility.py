@@ -59,46 +59,47 @@ class Lives(Enum):
     DECEASED = 2
 
 
-def format_performer(performer):
-    """Converts performer object to its name field, for printing purposes."""
-
-    from becausethenight.music.performer import Performer
-
-    if isinstance(performer, Performer):
-        return performer.name
-    else:
-        return 'unknown'
-
-
-def format_performer_type(performer):
-    """Converts the flag of performer type from boolean to string, if needed."""
-
-    from becausethenight.music.performer import Performer
-
-    if isinstance(performer, Performer):
-        return performer.name + ' (band)' if performer.is_band else ' (musician)'
-    else:
-        return 'unknown if band or musician'
-
-    # Alternatively:
-    # if isinstance(performer, Performer):
-    #     if performer.is_band:
-    #         return performer.name + ' (band)'
-    #     else:
-    #         return performer.name + ' (musician)'
-    # else:
-    #     return 'unknown if band or musician'
+# def format_performer(performer):
+#     """Converts performer object to its name field, for printing purposes."""
+#
+#     from becausethenight.music.performer import Performer
+#
+#     if isinstance(performer, Performer):
+#         return performer.name
+#     else:
+#         return 'unknown'
 
 
-def format_author(author):
-    """Converts performer object to its name field, for printing purposes."""
+# def format_performer_type(performer):
+#     """Converts the flag of performer type from boolean to string, if needed."""
+#
+#     from becausethenight.music.performer import Performer
+#
+#     print(type(performer))
+#     if isinstance(performer, Performer):
+#         return performer.name + ' (band)' if performer.is_band else ' (musician)'
+#     else:
+#         return 'unknown if band or musician'
+#
+#     # Alternatively:
+#     # if isinstance(performer, Performer):
+#     #     if performer.is_band:
+#     #         return performer.name + ' (band)'
+#     #     else:
+#     #         return performer.name + ' (musician)'
+#     # else:
+#     #     return 'unknown if band or musician'
 
-    from becausethenight.music.author import Author
 
-    if isinstance(author, Author):
-        return author.name
-    else:
-        return 'unknown'
+# def format_author(author):
+#     """Converts performer object to its name field, for printing purposes."""
+#
+#     from becausethenight.music.author import Author
+#
+#     if isinstance(author, Author):
+#         return author.name
+#     else:
+#         return 'unknown'
 
 
 def date_py_to_json(a_date):
@@ -108,10 +109,16 @@ def date_py_to_json(a_date):
 
 
 def date_json_to_py(iso_date):
-    """Converts string formatted as 'YYYY-mm-dd' to datetime.date object."""
+    """Converts string formatted as 'YYYY-mm-dd' to datetime.date object.
+    
+    The following return statement works with Python 3.7, PyCharm build od Sep 04, 2018,
+    although the editor/autocomplete does not recognize date.fromisoformat() and highlights it yellow."""
 
-    args = [int(x) for x in iso_date.split(sep='-')]
-    return date(args[0], args[1], args[2]) if len(args) == 3 else None
+    return date.fromisoformat(iso_date)
+
+    # Alternatively:
+    # args = [int(x) for x in iso_date.split(sep='-')]
+    # return date(args[0], args[1], args[2]) if len(args) == 3 else None
 
 
 if __name__ == '__main__':

@@ -2,6 +2,8 @@
 
 
 from enum import Enum
+import json
+
 from becausethenight.util import utility
 
 
@@ -74,7 +76,7 @@ class Author:
                 '\t' + 'born: ' + utility.format_date(self.birth_date) + '\n' +
                 '\t' + 'place of birth: ' + str(self.birth_place) + '\n' +
                 '\t' + 'nationality: ' + str(self.nationality) + '\n' +
-                '\t' + utility.alive_or_deceased(self.alive))
+                '\t' + alive_or_deceased(self.alive))
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
@@ -99,11 +101,17 @@ class Author:
         else:
             return cls('unknown')
 
-    def py_to_json(self):
-        d = self.__dict__
-        return d
-        # if d[self.__dict__['name']:
-
+    # def py_to_json(self):                                   # developed just for testing
+    #     d = self.__dict__
+    #     d['birth_date'] = utility.date_py_to_json(self.birth_date)
+    #     # d['alive'] = True if self.alive == 'alive' else False if self.alive == 'deceased' else 'unknown'
+    #     if self.alive == True or self.alive == Lives.ALIVE:
+    #         d['alive'] = True
+    #     elif self.alive == False or self.alive == Lives.DECEASED:
+    #         d['alive'] = False
+    #     else:
+    #         d['alive'] = 'unknown'
+    #     return d
 
     # def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True):
     #     self.__name = name
@@ -112,6 +120,78 @@ class Author:
     #     self.birth_place = birth_place
     #     self.nationality = nationality
     #     self.alive = alive
+
+
+def format_author(author):
+    """Converts performer object to its name field, for printing purposes."""
+
+    if isinstance(author, Author):
+        return author.name
+    else:
+        return 'unknown'
+
+
+def alive_or_deceased(alive):
+    """Converts the status of being alive or deceased from boolean to string."""
+
+    if isinstance(alive, bool):
+        return 'alive' if alive else 'deceased'
+    elif isinstance(alive, Lives):
+        return 'alive' if alive == Lives.ALIVE else 'deceased'
+    else:
+        return 'Alive/Deceased: unknown'
+
+    # Alternatively:
+    # if isinstance(alive, bool):
+    #     if alive:
+    #         return 'alive'
+    #     else:
+    #         return 'deceased'
+    # elif isinstance(alive, Lives):
+    #     if alive == Lives.ALIVE:
+    #         return 'alive'
+    #     else:
+    #         return 'deceased'
+    # else:
+    #     return 'Alive/Deceased: unknown'
+
+
+class Lives(Enum):
+    """The enum indicating the status of being alive or deceased."""
+
+    ALIVE = 1
+    DECEASED = 2
+
+
+class AuthorEncoder(json.JSONEncoder):
+    """JSON encoder for Author objects."""
+
+    def default(self, o):
+        if isinstance(o, Author):
+            d = o.__dict__
+            d['birth_date'] = utility.date_py_to_json(o.birth_date)
+            if o.alive == True or o.alive == Lives.ALIVE:
+                d['alive'] = True
+            elif o.alive == False or o.alive == Lives.DECEASED:
+                d['alive'] = False
+            else:
+                d['alive'] = 'unknown'
+            return {'__Author__': d}
+        return {'__{}__'.format(o.__class__.__name__): o.__dict__}
+
+
+def json_to_py(author_json):
+    """JSON decoder for Author objects (object_hook parameter in json.loads())."""
+
+    if '__Author__' in author_json:
+        author = Author('')
+        # performer = Performer('')
+        # performer.__dict__.update(performer_json['__Performer__'])
+        author.__dict__.update(author_json['__Author__'])
+        author.birth_date = utility.date_json_to_py(author.birth_date)
+        return author
+    return author_json
+
 
 class Musician(Author):
     """The class describing the concept of musician.
@@ -174,107 +254,107 @@ class SingerSongwriter(Musician, Poet):
         return super().__eq__(other)
 
 
-# The following functions have been moved to the utils.utility module:
-
-# def alive_or_deceased(alive):
-#     """Converts the status of being alive or deceased from boolean to string."""
-#
-#     if isinstance(alive, bool):
-#         if alive:
-#             return 'Alive'
-#         else:
-#             return 'Deceased'
-#     elif isinstance(alive, Lives):
-#         if alive == Lives.ALIVE:
-#             return 'Alive'
-#         else:
-#             return 'Deceased'
-#     else:
-#         return 'Alive/Deceased: unknown'
-
-
 if __name__ == "__main__":
 
     from datetime import date
+
+    # bruceSpringsteen = Author('Bruce Springsteen',
+    #                           69,
+    #                           date(1949, 9, 23),
+    #                           'Freehold',
+    #                           'US',
+    #                           Lives.ALIVE)
+    #
+    # print(bruceSpringsteen)                                                 # test __str__()
+    # print()
+
+    # bruce = Author('Bruce Springsteen',
+    #                birth_date=date(1949, 9, 23))
+    # if bruceSpringsteen == bruce:                                           # test __eq__()
+    #     print(True)
+    # else:
+    #     print(False)
+    # print()
+    #
+    # lennyKaye = Musician('Lenny Kaye', 70,                                  # test Musician
+    #                      date(1948, 2, 21),
+    #                      'New York City', 'US')
+    # print(lennyKaye)
+    #
+    # lenny = Musician('Lenny Kaye', 70,
+    #                  date(1948, 2, 21))
+    # if lennyKaye == lenny:
+    #     print('eq')
+    # else:
+    #     print('not eq')
+    # print()
+    #
+    # edgarAllanPoe = Poet('Edgar Allan Poe', -1,                             # test Poet
+    #                      date(1809, 1, 19),
+    #                      'Boston', 'US', False)
+    # print(edgarAllanPoe)
+    # print()
+    #
+    # jonathanWilson = SingerSongwriter('Jonathan Wilson', 50,                # test SingerSongwriter (mult. inheritance)
+    #                                   date(1968, 5, 29),
+    #                                   'Boston', 'US', False)
+    # print(jonathanWilson)
+    # print()
+    #
+    # print(edgarAllanPoe.name)                                               # test name property (step through code)
+    # edgarAllanPoe.name = 'E. A. Poe'
+    # print(edgarAllanPoe.name)
+    # print()
+    #
+    # print('Just print static field:', edgarAllanPoe.definition)             # test static field/attribute
+    # edgarAllanPoe.definition = "An artist who creates poetry."
+    # print('Just print modified static field:', edgarAllanPoe.definition)    # show edgarAllanPoe fields in debugger
+    # print('Print modified static field from class:', Poet.definition)       # show Poet fields in debugger
+    # Poet.definition = "An artist who creates poetry."                       # modify static field from the class level
+    # print('Print modified static field again:', edgarAllanPoe.definition)
+    # print()
+    #
+    # print('Staticmethod called from a base class instance: ', end='')       # test staticmethod
+    # bruceSpringsteen.show_generic_definition()
+    # print('Staticmethod called from a subclass instance: ', end='')
+    # edgarAllanPoe.show_generic_definition()
+    # print('Staticmethod called from base class: ', end='')
+    # Author.show_generic_definition()
+    # print('Staticmethod called from subclass: ', end='')
+    # Poet.show_generic_definition()
+    # print()
+    #
+    # print('Classmethod called from a base class instance: ', end='')        # test classmethod
+    # bruceSpringsteen.show_definition()
+    # print('Classmethod called from a subclass instance: ', end='')
+    # edgarAllanPoe.show_definition()
+    # print('Classmethod called from base class: ', end='')
+    # Author.show_definition()
+    # print('Classmethod called from subclass: ', end='')
+    # Poet.show_definition()
+    # print()
+    #
+    # townesVanZandt = Musician.get_instance('Townes Van Zandt')              # test alternative constructor
+    # print(townesVanZandt)
+    # print()
 
     bruceSpringsteen = Author('Bruce Springsteen',
                               69,
                               date(1949, 9, 23),
                               'Freehold',
                               'US',
-                              utility.Lives.ALIVE)
-    print(bruceSpringsteen)                                                 # test __str__()
+                              Lives.ALIVE)
+    print(bruceSpringsteen)
     print()
 
-    bruce = Author('Bruce Springsteen',
-                   birth_date=date(1949, 9, 23))
-    if bruceSpringsteen == bruce:                                           # test __eq__()
-        print(True)
-    else:
-        print(False)
+    bruceSpringsteen_json = json.dumps(bruceSpringsteen,                    # test JSON serialization/deserialization
+                                       indent=4,
+                                       cls=AuthorEncoder)
+    # bruceSpringsteen_json = bruceSpringsteen.py_to_json()
+    # print(type(bruceSpringsteen_json))
+    print(bruceSpringsteen_json)
     print()
 
-    lennyKaye = Musician('Lenny Kaye', 70,                                  # test Musician
-                         date(1948, 2, 21),
-                         'New York City', 'US')
-    print(lennyKaye)
-
-    lenny = Musician('Lenny Kaye', 70,
-                     date(1948, 2, 21))
-    if lennyKaye == lenny:
-        print('eq')
-    else:
-        print('not eq')
+    bruce = json.loads(bruceSpringsteen_json, object_hook=json_to_py)
+    print(bruce)
     print()
-
-    edgarAllanPoe = Poet('Edgar Allan Poe', -1,                             # test Poet
-                         date(1809, 1, 19),
-                         'Boston', 'US', False)
-    print(edgarAllanPoe)
-    print()
-
-    jonathanWilson = SingerSongwriter('Jonathan Wilson', 50,                # test SingerSongwriter (mult. inheritance)
-                                      date(1968, 5, 29),
-                                      'Boston', 'US', False)
-    print(jonathanWilson)
-    print()
-
-    print(edgarAllanPoe.name)                                               # test name property (step through code)
-    edgarAllanPoe.name = 'E. A. Poe'
-    print(edgarAllanPoe.name)
-    print()
-
-    print('Just print static field:', edgarAllanPoe.definition)             # test static field/attribute
-    edgarAllanPoe.definition = "An artist who creates poetry."
-    print('Just print modified static field:', edgarAllanPoe.definition)    # show edgarAllanPoe fields in debugger
-    print('Print modified static field from class:', Poet.definition)       # show Poet fields in debugger
-    Poet.definition = "An artist who creates poetry."                       # modify static field from the class level
-    print('Print modified static field again:', edgarAllanPoe.definition)
-    print()
-
-    print('Staticmethod called from a base class instance: ', end='')       # test staticmethod
-    bruceSpringsteen.show_generic_definition()
-    print('Staticmethod called from a subclass instance: ', end='')
-    edgarAllanPoe.show_generic_definition()
-    print('Staticmethod called from base class: ', end='')
-    Author.show_generic_definition()
-    print('Staticmethod called from subclass: ', end='')
-    Poet.show_generic_definition()
-    print()
-
-    print('Classmethod called from a base class instance: ', end='')        # test classmethod
-    bruceSpringsteen.show_definition()
-    print('Classmethod called from a subclass instance: ', end='')
-    edgarAllanPoe.show_definition()
-    print('Classmethod called from base class: ', end='')
-    Author.show_definition()
-    print('Classmethod called from subclass: ', end='')
-    Poet.show_definition()
-    print()
-
-    townesVanZandt = Musician.get_instance('Townes Van Zandt')              # test alternative constructor
-    print(townesVanZandt)
-    print()
-
-    print(bruceSpringsteen.py_to_json())
-
