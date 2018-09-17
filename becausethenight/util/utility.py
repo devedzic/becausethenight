@@ -4,7 +4,7 @@ from becausethenight import settings
 from becausethenight.music import song
 
 from enum import Enum
-from datetime import date
+from datetime import date, datetime
 import pickle
 import json
 from pathlib import Path
@@ -172,9 +172,9 @@ if __name__ == '__main__':
     # print('date_py_to_json():', date_py_to_json(None))
     # print('date_json_to_py():', date_json_to_py(release_date))
     # print()
-
+                                                                        # test pathlib.Path()
     print()
-    # # current_dir = Path('.')                                                 # print() and str() return only '.'
+    # # current_dir = Path('.')                                             # print() and str() return only '.'
     # current_dir = Path('.').absolute()
     # print('Current dir:', current_dir)
     # print('Parent dir:', current_dir.parent)
@@ -187,14 +187,32 @@ if __name__ == '__main__':
     # print()
     # new_dir = Path.cwd() / 'new/data/blues'
     # new_dir.mkdir(parents=True, exist_ok=True)
-    # new_dir.rmdir()                                                         # rmdir() requres the dir to be empty
+    # new_dir.rmdir()                                                     # rmdir() requres the dir to be empty
     # print(new_dir)
-    print('get_data_dir():', get_data_dir())
-    because_the_night = song.Song('Because the Night')
-    file = get_data_dir() / 'because_the_night.txt'
-    file.write_text(str(because_the_night))
-    song = file.read_text()
-    print(song)
 
-    # print(Path.home())
+    # print('get_data_dir():', get_data_dir())
+    # because_the_night = song.Song('Because the Night')
+    # file = get_data_dir() / 'because_the_night.txt'
+    # file.write_text(str(because_the_night))
+    # song = file.read_text()
+    # print(song)
+    #
+    # # print(Path.home())
+    # print()
+
+    the_date = datetime(1978, 3, 2)                                     # test datetime
+    print(the_date)
+    print(str(the_date.day) + '.' +
+          str(the_date.month) + '.' +
+          str(the_date.year))
+    print(the_date.strftime("%b %d, %Y, %A"))
+    now = datetime.now()
+    print(now)
+    today = datetime.today()
+    print(today)
+    print(type(now), type(today))
+    print('future') if the_date > today else print('past')
     print()
+
+
+
