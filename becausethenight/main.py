@@ -67,3 +67,7 @@
 # statements.demonstrate_branching()
 # statements.demonstrate_loops()
 
+from becausethenight.util import utility
+print(utility.get_project_dir())
+
+
