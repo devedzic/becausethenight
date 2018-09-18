@@ -8,6 +8,7 @@ from datetime import date, datetime
 import pickle
 import json
 from pathlib import Path
+from collections import Counter
 
 
 def format_duration(seconds):
@@ -200,18 +201,31 @@ if __name__ == '__main__':
     # # print(Path.home())
     # print()
 
-    the_date = datetime(1978, 3, 2)                                     # test datetime
-    print(the_date)
-    print(str(the_date.day) + '.' +
-          str(the_date.month) + '.' +
-          str(the_date.year))
-    print(the_date.strftime("%b %d, %Y, %A"))
-    now = datetime.now()
-    print(now)
-    today = datetime.today()
-    print(today)
-    print(type(now), type(today))
-    print('future') if the_date > today else print('past')
+    # the_date = datetime(1978, 3, 2)                                     # test datetime
+    # print(the_date)
+    # print(str(the_date.day) + '.' +
+    #       str(the_date.month) + '.' +
+    #       str(the_date.year))
+    # print(the_date.strftime("%b %d, %Y, %A"))
+    # now = datetime.now()
+    # print(now)
+    # today = datetime.today()
+    # print(today)
+    # print(type(now), type(today))
+    # print('future') if the_date > today else print('past')
+    # print()
+
+    file = Path(settings.PROJECT_DIR) / 'data/Because the Night.txt'
+    # print(file)
+    lyrics = file.read_text()
+    words = lyrics.split()
+    # print(type(words))
+    word_counter = Counter(words)
+    most_common_10 = word_counter.most_common(10)
+    least_common_10 = word_counter.most_common()[:-10-1:-1]             # n least common: [:-n-1:-1]
+    print(most_common_10)
+    print(least_common_10)
+    print(sorted(least_common_10))
     print()
 
 
