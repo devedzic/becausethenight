@@ -3,6 +3,9 @@
 
 from becausethenight.util import utility
 
+import requests
+from bs4 import BeautifulSoup
+
 
 class Album:
     """The class describing the concept of album.
@@ -90,154 +93,176 @@ def generate_songs(songs):
         i += 1
 
 
+def crawl(url, max_pages=1):
+    """Web crawler that collects info about albums from the Web.
+    Parameters: the url of the starting Web page and the max number of pages to crawl in case of multi-page lists."""
+
+    page = 1
+    # page_text = '***'
+    soup = '***'
+    while page <= max_pages:
+        current_url = url + '?page=' + str(page)
+        page_source = requests.get(current_url, allow_redirects=False)
+        page_text = page_source.text.encode('utf-8', 'replace')
+        soup = BeautifulSoup(page_text, 'html.parser')
+        page += 1
+    # return page_text
+    return soup
+
+
 if __name__ == "__main__":
 
-    from becausethenight.music.song import Song
-    from becausethenight.music.performer import Performer
-    from becausethenight.music.author import Author
-    from datetime import date
-
-    pattiSmithGroup = Performer("Patti Smith Group", is_band=True)
-    bruce = Author("Bruce Springsteen")
-    patti = Author("Patti Smith")
-    bruce_and_patti = Author("Bruce Springsteen, Patti Smith")
-
-    till_victory = Song("Till Victory",
-                        performer=pattiSmithGroup,
-                        author=patti,
-                        duration=370,
-                        release_date=date(1978, 2, 12))
-    space_monkey = Song("Space Monkey",
-                        performer=pattiSmithGroup,
-                        author=patti,
-                        duration=233,
-                        release_date=date(1978, 1, 23))
-    because_the_night = Song("Because the Night",
-                             performer=pattiSmithGroup,
-                             author=bruce_and_patti,
-                             duration=333,
-                             release_date=date(1978, 3, 2))
-
-    songs = [till_victory, space_monkey, because_the_night]
-
-    print('\tsongs:')                                           # test formatting a song list
-    print(format_songs([]))
-    print('\tsongs:')
-    print(format_songs(songs))
-    print()
-
+    # from becausethenight.music.song import Song
+    # from becausethenight.music.performer import Performer
+    # from becausethenight.music.author import Author
+    # from datetime import date
+    #
+    # pattiSmithGroup = Performer("Patti Smith Group", is_band=True)
+    # bruce = Author("Bruce Springsteen")
+    # patti = Author("Patti Smith")
+    # bruce_and_patti = Author("Bruce Springsteen, Patti Smith")
+    #
+    # till_victory = Song("Till Victory",
+    #                     performer=pattiSmithGroup,
+    #                     author=patti,
+    #                     duration=370,
+    #                     release_date=date(1978, 2, 12))
+    # space_monkey = Song("Space Monkey",
+    #                     performer=pattiSmithGroup,
+    #                     author=patti,
+    #                     duration=233,
+    #                     release_date=date(1978, 1, 23))
+    # because_the_night = Song("Because the Night",
+    #                          performer=pattiSmithGroup,
+    #                          author=bruce_and_patti,
+    #                          duration=333,
+    #                          release_date=date(1978, 3, 2))
+    #
+    # songs = [till_victory, space_monkey, because_the_night]
+    #
+    # print('\tsongs:')                                           # test formatting a song list
+    # print(format_songs([]))
+    # print('\tsongs:')
+    # print(format_songs(songs))
+    # print()
+    #
+    # # for song in songs:
+    # #     print(song)
+    # # print()
+    #
+    # easter = Album('Easter')                                    # test formatting an Album object
+    # print(easter)
+    # easter = Album('Easter',
+    #                pattiSmithGroup,
+    #                songs,
+    #                2800,
+    #                date(1978, 3, 2))
+    # print(easter)
+    # print()
+    #
+    # s = 'Rock'                                                  # demonstrate iterators
+    # print('s:', s)
+    # s_iterator = iter(s)
+    # print('s_iterator:', s_iterator)
+    # print('Iterating through s:')
+    # for char in s:
+    #     print(next(s_iterator))
+    # print()
+    #
+    # songs_iterator = iter(songs)
+    # print('songs_iterator:', songs_iterator)
+    # print('Iterating through songs:')
     # for song in songs:
+    #     print(next(songs_iterator))
+    # print()
+    #
+    # print('Iterating through songs from album:')
+    # for song in easter:
     #     print(song)
     # print()
+    #
+    # def simple_generator():                                     # demonstrate generators
+    #     yield("Patti Smith")
+    #     yield("Bruce Springsteen")
+    #     yield("Southside Johnny")
+    #     yield("...")
+    #
+    # g = simple_generator()
+    # print("Great musicians:")
+    # for m in simple_generator():
+    #     print('\t', m)
+    # print()
+    #
+    # print("Songs on the 'Easter' album:")
+    # for song in generate_songs(easter.songs):
+    #     print(song)
+    # print()
+    #
+    # for i in range(5):                                          # demonstrate catching exceptions
+    #     try:
+    #         print(songs[i])
+    #     # except IndexError:
+    #     #     print("Exception: index out of bounds.")
+    #     #     break
+    #     # except IndexError as err:
+    #     #     # print("Exception:", err.args, "(i = " + str(i) + ").")
+    #     #     print("Exception:", err.args[0], "(i = " + str(i) + ").")
+    #     #     break
+    #     except IndexError as err:
+    #         print("Exception:", err.args[0], "(i = " + str(i) + ").")
+    #         break
+    # print()
+    #
+    # for i in range(2):                                          # demonstrate catching multiple exceptions and finally
+    #     try:
+    #         print(songs[i])
+    #         print(songs[i] / 4)
+    #         print("Whatever...")
+    #     except IndexError as err:
+    #         print("Exception:", err.args[0], "(i = " + str(i) + ").")
+    #         break
+    #     except Exception as err:
+    #         # print("Exception:", err.args[0])
+    #         print(type(err).__name__ + ':', err.args[0])
+    #         break
+    #     finally:
+    #         print("Stopped printing songs.")
+    # print()
+    #
+    # for i in range(5):                                          # demonstrate catching "any" exception
+    #     try:
+    #         print(songs[i])
+    #         print(songs[i] / 4)
+    #     except:
+    #         print("Caught an exception...")
+    #         break
+    # print()
+    #
+    # for i in range(5):                                          # demonstrate else clause (must be after all except's)
+    #     try:
+    #         print(songs[i])
+    #     except IndexError as err:
+    #         print("Exception:", err.args[0], "(i = " + str(i) + ").")
+    #         break
+    #     except Exception as err:
+    #         # print("Exception:", err.args[0])
+    #         print(type(err).__name__ + ':', err.args[0])
+    #         break
+    #     else:
+    #         print("Executing the else clause...")
+    # print()
+    #
+    # import sys
+    # dancing_barefoot = Song('Dancing Barefoot')                 # demonstrate catching user-defined exception
+    # # play_song(dancing_barefoot, easter)
+    # try:
+    #     play_song(dancing_barefoot, easter)
+    # except SongNotIncludedError as err:
+    #     print(err.message)
+    #     # sys.stderr.write(err.message)                         # does not produce any output in PyCharm; a bug?
+    # print()
 
-    easter = Album('Easter')                                    # test formatting an Album object
-    print(easter)
-    easter = Album('Easter',
-                   pattiSmithGroup,
-                   songs,
-                   2800,
-                   date(1978, 3, 2))
-    print(easter)
     print()
-
-    s = 'Rock'                                                  # demonstrate iterators
-    print('s:', s)
-    s_iterator = iter(s)
-    print('s_iterator:', s_iterator)
-    print('Iterating through s:')
-    for char in s:
-        print(next(s_iterator))
-    print()
-
-    songs_iterator = iter(songs)
-    print('songs_iterator:', songs_iterator)
-    print('Iterating through songs:')
-    for song in songs:
-        print(next(songs_iterator))
-    print()
-
-    print('Iterating through songs from album:')
-    for song in easter:
-        print(song)
-    print()
-
-    def simple_generator():                                     # demonstrate generators
-        yield("Patti Smith")
-        yield("Bruce Springsteen")
-        yield("Southside Johnny")
-        yield("...")
-
-    g = simple_generator()
-    print("Great musicians:")
-    for m in simple_generator():
-        print('\t', m)
-    print()
-
-    print("Songs on the 'Easter' album:")
-    for song in generate_songs(easter.songs):
-        print(song)
-    print()
-
-    for i in range(5):                                          # demonstrate catching exceptions
-        try:
-            print(songs[i])
-        # except IndexError:
-        #     print("Exception: index out of bounds.")
-        #     break
-        # except IndexError as err:
-        #     # print("Exception:", err.args, "(i = " + str(i) + ").")
-        #     print("Exception:", err.args[0], "(i = " + str(i) + ").")
-        #     break
-        except IndexError as err:
-            print("Exception:", err.args[0], "(i = " + str(i) + ").")
-            break
-    print()
-
-    for i in range(2):                                          # demonstrate catching multiple exceptions and finally
-        try:
-            print(songs[i])
-            print(songs[i] / 4)
-            print("Whatever...")
-        except IndexError as err:
-            print("Exception:", err.args[0], "(i = " + str(i) + ").")
-            break
-        except Exception as err:
-            # print("Exception:", err.args[0])
-            print(type(err).__name__ + ':', err.args[0])
-            break
-        finally:
-            print("Stopped printing songs.")
-    print()
-
-    for i in range(5):                                          # demonstrate catching "any" exception
-        try:
-            print(songs[i])
-            print(songs[i] / 4)
-        except:
-            print("Caught an exception...")
-            break
-    print()
-
-    for i in range(5):                                          # demonstrate else clause (must be after all except's)
-        try:
-            print(songs[i])
-        except IndexError as err:
-            print("Exception:", err.args[0], "(i = " + str(i) + ").")
-            break
-        except Exception as err:
-            # print("Exception:", err.args[0])
-            print(type(err).__name__ + ':', err.args[0])
-            break
-        else:
-            print("Executing the else clause...")
-    print()
-
-    import sys
-    dancing_barefoot = Song('Dancing Barefoot')                 # demonstrate catching user-defined exception
-    # play_song(dancing_barefoot, easter)
-    try:
-        play_song(dancing_barefoot, easter)
-    except SongNotIncludedError as err:
-        print(err.message)
-        # sys.stderr.write(err.message)                         # does not produce any output in PyCharm; a bug?
-    print()
+    url = 'https://www.discogs.com/artist/193816-Patti-Smith'
+    returned = crawl(url)
+    print(returned)
