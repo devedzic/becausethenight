@@ -105,6 +105,7 @@ def crawl(url, max_pages=1):
 
         current_url = url + '?page=' + str(page)
         response = requests.get(current_url, allow_redirects=False)     # create Response object from GET request
+        response_text = response.text                                   # get text from the Response object
 
         '''Encode response text as bytes object, using str.encode(encoding="utf-8", errors="strict").
         From str.encode() documentation: The errors argument specifies the response when the input string can’t be 
@@ -112,11 +113,27 @@ def crawl(url, max_pages=1):
         'strict' (raise a UnicodeDecodeError exception), 
         'replace' (use U+FFFD, REPLACEMENT CHARACTER), 
         'ignore' (just leave the character out of the Unicode result), 
-        or 'backslashreplace' (inserts a \xNN escape sequence).
-        The following line uses str.encode() to prepare the text of the response for BeautifulSoup.'''
-        response_text_bytes = response.text.encode('utf-8', 'replace')
-
+        or 'backslashreplace' (inserts a \\xNN escape sequence).
+        
+        The following lines use str.encode() to prepare the text of the response for BeautifulSoup as a bytes object, 
+        using encoding="utf-8" and errors="replace":
+        
+        response_text_bytes = response_text.encode('utf-8', 'replace')
         soup = BeautifulSoup(response_text_bytes, 'html.parser')
+        
+        The following line uses the response text directly as a string in the BeautifulSoup constructor 
+        (encoding="utf-8" and errors="strict" is assumed, hence it can raise a UnicodeDecodeError exception):
+        
+        soup = BeautifulSoup(response_text, 'html.parser')
+        
+        The following line uses the response text directly as a string, as well as a default HTML parser
+        (but issues a warning about it as well):
+        
+        soup = BeautifulSoup(response_text)
+        '''
+
+        soup = BeautifulSoup(response_text, 'html.parser')              # create BeautifulSoup object from response text
+
         page += 1
     # return page_text
     return soup
@@ -276,5 +293,12 @@ if __name__ == "__main__":
 
     print()
     url = 'https://www.discogs.com/artist/193816-Patti-Smith'
-    returned = crawl(url)
-    print(returned)
+    returned = crawl(url, 3)
+    # print(type(returned))
+    # print(returned)
+
+    a_tags = returned.find_all('a')
+    print(a_tags[5])
+    print(a_tags[5].attrs)
+    # because_the_night_tags = [tag for tag in a_tags if 'ecause' in tag.attrs['href']]
+    # print(because_the_night_tags)
