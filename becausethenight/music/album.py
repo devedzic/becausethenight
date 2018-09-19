@@ -100,11 +100,23 @@ def crawl(url, max_pages=1):
     page = 1
     # page_text = '***'
     soup = '***'
+
     while page <= max_pages:
+
         current_url = url + '?page=' + str(page)
-        page_source = requests.get(current_url, allow_redirects=False)
-        page_text = page_source.text.encode('utf-8', 'replace')
-        soup = BeautifulSoup(page_text, 'html.parser')
+        response = requests.get(current_url, allow_redirects=False)     # create Response object from GET request
+
+        '''Encode response text as bytes object, using str.encode(encoding="utf-8", errors="strict").
+        From str.encode() documentation: The errors argument specifies the response when the input string can’t be 
+        converted according to the encoding’s rules. Legal values for this argument are 
+        'strict' (raise a UnicodeDecodeError exception), 
+        'replace' (use U+FFFD, REPLACEMENT CHARACTER), 
+        'ignore' (just leave the character out of the Unicode result), 
+        or 'backslashreplace' (inserts a \xNN escape sequence).
+        The following line uses str.encode() to prepare the text of the response for BeautifulSoup.'''
+        response_text_bytes = response.text.encode('utf-8', 'replace')
+
+        soup = BeautifulSoup(response_text_bytes, 'html.parser')
         page += 1
     # return page_text
     return soup
