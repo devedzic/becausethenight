@@ -292,13 +292,35 @@ if __name__ == "__main__":
     # print()
 
     print()
-    url = 'https://www.discogs.com/artist/193816-Patti-Smith'
-    returned = crawl(url, 3)
-    # print(type(returned))
-    # print(returned)
+    # BASE_URL = 'https://www.discogs.com'
+    # start_url = 'https://www.discogs.com/artist/193816-Patti-Smith'
+    # soup = crawl(start_url, 3)
+    start_url = 'https://theculturetrip.com/north-america/usa/new-york/articles/five-essential-patti-smith-albums/'
+    soup = crawl(start_url, 1)
+    # print(type(soup))
+    # print(soup)
+    # soup_file = utility.get_data_dir() / 'soup.html'
+    # soup_file.write_text(str(soup), encoding='utf-8', errors='replace')
 
-    a_tags = returned.find_all('a')
-    print(a_tags[5])
-    print(a_tags[5].attrs)
-    # because_the_night_tags = [tag for tag in a_tags if 'ecause' in tag.attrs['href']]
-    # print(because_the_night_tags)
+    # a_tags = \
+    #     soup.find_all('a',
+    #                   {'class':
+    #                        "thumbnail_link thumbnail_size_small thumbnail_orientation_landscape thumbnail-lazyload "})
+    # for tag in a_tags:
+    #     tag.
+    # print(a_tags[0])
+    # print(a_tags[0].attrs)
+    # a_tags_file = utility.get_data_dir() / 'a_tags.html'
+    # a_tags_file.write_text(str(a_tags), encoding='utf-8', errors='replace')
+
+    for link in soup.find_all('img'):
+        # print(link)
+        src = link.get('src')
+        # print(src)
+        alt = link.get('alt')
+        # print(alt)
+        if src:
+            if alt and alt != '':
+                print(src)
+
+
