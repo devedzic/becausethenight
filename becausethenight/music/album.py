@@ -99,7 +99,7 @@ def crawl(url, max_pages=1):
 
     page = 1
     # page_text = '***'
-    soup = '***'
+    soups = []
 
     while page <= max_pages:
 
@@ -133,10 +133,11 @@ def crawl(url, max_pages=1):
         '''
 
         soup = BeautifulSoup(response_text, 'html.parser')              # create BeautifulSoup object from response text
+        soups.append(soup)
 
         page += 1
     # return page_text
-    return soup
+    return soups
 
 
 if __name__ == "__main__":
@@ -296,31 +297,44 @@ if __name__ == "__main__":
     # start_url = 'https://www.discogs.com/artist/193816-Patti-Smith'
     # soup = crawl(start_url, 3)
     start_url = 'https://theculturetrip.com/north-america/usa/new-york/articles/five-essential-patti-smith-albums/'
-    soup = crawl(start_url, 1)
-    # print(type(soup))
-    # print(soup)
-    # soup_file = utility.get_data_dir() / 'soup.html'
-    # soup_file.write_text(str(soup), encoding='utf-8', errors='replace')
+    soups = crawl(start_url, 1)
 
-    # a_tags = \
-    #     soup.find_all('a',
-    #                   {'class':
-    #                        "thumbnail_link thumbnail_size_small thumbnail_orientation_landscape thumbnail-lazyload "})
-    # for tag in a_tags:
-    #     tag.
-    # print(a_tags[0])
-    # print(a_tags[0].attrs)
-    # a_tags_file = utility.get_data_dir() / 'a_tags.html'
-    # a_tags_file.write_text(str(a_tags), encoding='utf-8', errors='replace')
+    for soup in soups:
+        # Just experimenting:
+        # print(type(soup))
+        # print(soup)
+        # soup_file = utility.get_data_dir() / 'soup.html'
+        # soup_file.write_text(str(soup), encoding='utf-8', errors='replace')
 
-    for link in soup.find_all('img'):
-        # print(link)
-        src = link.get('src')
-        # print(src)
-        alt = link.get('alt')
-        # print(alt)
-        if src:
-            if alt and alt != '':
-                print(src)
+        # a_tags = \
+        #     soup.find_all('a',
+        #                   {'class':
+        #                        "thumbnail_link thumbnail_size_small thumbnail_orientation_landscape thumbnail-lazyload "})
+        # for tag in a_tags:
+        #     tag.
+        # print(a_tags[0])
+        # print(a_tags[0].attrs)
+        # a_tags_file = utility.get_data_dir() / 'a_tags.html'
+        # a_tags_file.write_text(str(a_tags), encoding='utf-8', errors='replace')
+
+        albums = []
+        for link in soup.find_all('h2'):                        # get album titles
+            # print(link.text)
+            albums.append(link.text)
+
+        album = iter(albums)
+        for link in soup.find_all('img'):
+            # print(link)
+            src = link.get('src')
+            # print(src)
+            alt = link.get('alt')
+            # print(alt)
+            if src:
+                if alt:                                         # if alt and alt != '', but '' also evaluates to False
+                    print()
+                    if '|' in alt:
+                        print(album.__next__())
+                    print(alt)
+                    print(src)
 
 
