@@ -1,7 +1,9 @@
-'''Demonstrates working with lists'''
+"""Demonstrates working with lists.
+"""
+
 
 def demonstrate_lists():
-    '''Using just the simplest operations with lists.'''
+    """Using just the simplest operations with lists."""
 
     list_with_diverse_elements = ["Patti Smith", "Bruce Springsteen", 1978]                     # creating non-empty l.
     print(list_with_diverse_elements[0])                                                        # accessing elements
@@ -19,12 +21,14 @@ def demonstrate_lists():
     for e in list_with_diverse_elements:                                                        # looping through a list
         print('\t', e)
 
+
 def demonstrate_list_methods():
-    '''Using append(), insert(), remove(), pop(), extend().
+    """Using append(), insert(), remove(), pop(), extend().
     count(), index(), reverse(), len(),... are not demonstrated here,
     but can be exercised in classes/labs as well.
     Also, "in" and "not in" operators can be used to search lists
-    for the occurrence of a given element.'''
+    for the occurrence of a given element.
+    """
 
     songs = ["Till Victory", "Space Monkey", "Because the Night"]
     print("Just the first three songs:", songs)
@@ -60,8 +64,9 @@ def demonstrate_list_methods():
     print("After songs.append(['Space Monkey', 'Because the Night']):")
     print('\t', songs)
 
+
 def demonstrate_arrays():
-    '''Using array.array() to build list-based numeric arrays.'''
+    """Using array.array() to build list-based numeric arrays."""
 
     from array import array
     a = array('i', [1, -92, 3])                                             # 'i' - int; 'd' - double; etc.
@@ -72,8 +77,9 @@ def demonstrate_arrays():
     print('b:', b)
     print('b[1]:', b[1])
 
+
 def populate_empty_list():
-    '''Creating an empty list and populating it with random values.'''
+    """Creating an empty list and populating it with random values."""
 
     import random
     list_with_random_values = []                                            # create an empty list
@@ -84,8 +90,9 @@ def populate_empty_list():
     print(list_with_random_values[:10], '...')
     print(str(list_with_random_values[:10]) + ',...')
 
+
 def duplicate_list():
-    '''Duplicating lists (carefully :))'''
+    """Duplicating lists (carefully :))"""
 
     listA = [1, 2, 3]
     listB = listA                                           # NO!!! it only copies pointers/references!
@@ -101,8 +108,9 @@ def duplicate_list():
     print('id(listA):',
           str(id(listA)) + '; id(listD):', id(listD))
 
+
 def demonstrate_list_comprehension():
-    '''Showing examples of list comprehension.'''
+    """Showing examples of list comprehension."""
 
     from array import array
     a = array('i', [1, -92, 3])                                             # 'i' - int; 'd' - double; etc.

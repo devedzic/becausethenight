@@ -1,3 +1,6 @@
+"""main.py - the starting point"""
+
+
 # Hello World
 
 # print("Because the Night")

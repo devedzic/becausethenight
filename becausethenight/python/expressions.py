@@ -1,14 +1,15 @@
-'''Demonstrates how operators and expressions work in Python'''
+"""Demonstrates how operators and expressions work in Python"""
 
 
 def demonstrate_arithmetic_operators():
-    '''Working with arithmetic operators.'''
+    """Working with arithmetic operators."""
 
     a = ((7//3)**3) % 3 + 2                 # the result should be 4
     print('Result:', a)
 
+
 def demonstrate_relational_operators():
-    '''Working with relational operators.'''
+    """Working with relational operators."""
 
     if 1 >= 3:
         print('1 >= 3')
@@ -33,7 +34,7 @@ def demonstrate_relational_operators():
         print('d2 is d3')
     else:
         print('d2 is not d3')
-    if d2 == d3:                    # returns True (since d2 and d3 are equal)
+    if d2 == d3:                            # returns True (since d2 and d3 are equal)
         print('d2 == d3')
     else:
         print('d2 != d3')
@@ -43,8 +44,9 @@ def demonstrate_relational_operators():
     print('a =', a)
     print('Type of None:', type(None))
 
+
 def demonstrate_logical_operators():
-    '''Working with logical operators.'''
+    """Working with logical operators."""
 
     print('True and False:', True and False)
     print('True or False:', True or False)
@@ -60,6 +62,8 @@ def demonstrate_logical_operators():
     print()
 
     print('d2 and None:', d2 and None)
-    print('d2 > None:', d2 > None)      # generates an error:
-                                        # TypeError: '>' not supported between instances of 'datetime.date' and 'NoneType'
+    # the next line generates an error:
+    # TypeError: '>' not supported between instances of 'datetime.date' and 'NoneType'
+    print('d2 > None:', d2 > None)
+
 
