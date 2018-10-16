@@ -16,8 +16,8 @@ def demonstrate_lists():
 
     list_with_diverse_elements = list_with_diverse_elements + ['NYC', 'Because the Night']      # concatenating 2 lists
     print('Concatenated list:', list_with_diverse_elements)
-    print('Looping through the list elements:')
 
+    print('Looping through the list elements:')
     for e in list_with_diverse_elements:                                                        # looping through a list
         print('\t', e)
 
