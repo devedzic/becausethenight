@@ -1,4 +1,5 @@
-"""Domain classes and functions related to the concept of album"""
+"""Domain classes and functions related to the concept of album
+"""
 
 
 from becausethenight.util import utility
@@ -10,7 +11,8 @@ from bs4 import BeautifulSoup
 class Album:
     """The class describing the concept of album.
     It is assumed that an album is sufficiently described by its
-    title, performer, duration and release date."""
+    title, performer, duration and release date.
+    """
 
     definition = 'A collection of audio recordings issued as a single item on CD, record, audio tape or another medium.'
 
@@ -25,7 +27,7 @@ class Album:
 
     def __str__(self):
         return (self.title + '\n' +
-                '\t' + 'performer(s): ' + utility.format_performer(self.performer) + '\n' +
+                '\t' + 'performer(s): ' + str(self.performer) + '\n' +
                 '\t' + 'songs:' + '\n' +
                 format_songs(self.songs) + '\n' +
                 '\t' + 'duration: ' + utility.format_duration(self.duration) + '\n' +
@@ -51,14 +53,16 @@ class Album:
 
 
 class AlbumError(Exception):
-    """Base class for exceptions in this module."""
+    """Base class for exceptions in this module.
+    """
 
     pass
 
 
 class SongNotIncludedError(AlbumError):
     """Exception raised when a song from an album is requested,
-    but is not included in the list of songs from that album."""
+    but is not included in the list of songs from that album.
+    """
 
     def __init__(self, song, album):
         self.song = song
@@ -67,7 +71,8 @@ class SongNotIncludedError(AlbumError):
 
 
 def play_song(song, album):
-    """Play the requested song from the album."""
+    """Play the requested song from the album.
+    """
 
     if song in album.songs:
         print(song)
@@ -76,7 +81,8 @@ def play_song(song, album):
 
 
 def format_songs(songs):
-    """Formats the album's song list for __str__()."""
+    """Formats the album's song list for __str__().
+    """
 
     if isinstance(songs, list) and songs != []:
         return '\t\t' + '\n\t\t'.join(song.title for song in songs)
@@ -85,7 +91,8 @@ def format_songs(songs):
 
 
 def generate_songs(songs):
-    """A generator of Song objects, given the input list of songs."""
+    """A generator of Song objects, given the input list of songs.
+    """
 
     i = 0
     while i < len(songs):
@@ -95,7 +102,8 @@ def generate_songs(songs):
 
 def crawl(url, max_pages=1):
     """Web crawler that collects info about albums from the Web.
-    Parameters: the url of the starting Web page and the max number of pages to crawl in case of multi-page lists."""
+    Parameters: the url of the starting Web page and the max number of pages to crawl in case of multi-page lists.
+    """
 
     page = 1
     # page_text = '***'
@@ -142,54 +150,54 @@ def crawl(url, max_pages=1):
 
 if __name__ == "__main__":
 
-    # from becausethenight.music.song import Song
-    # from becausethenight.music.performer import Performer
-    # from becausethenight.music.author import Author
-    # from datetime import date
-    #
-    # pattiSmithGroup = Performer("Patti Smith Group", is_band=True)
-    # bruce = Author("Bruce Springsteen")
-    # patti = Author("Patti Smith")
-    # bruce_and_patti = Author("Bruce Springsteen, Patti Smith")
-    #
-    # till_victory = Song("Till Victory",
-    #                     performer=pattiSmithGroup,
-    #                     author=patti,
-    #                     duration=370,
-    #                     release_date=date(1978, 2, 12))
-    # space_monkey = Song("Space Monkey",
-    #                     performer=pattiSmithGroup,
-    #                     author=patti,
-    #                     duration=233,
-    #                     release_date=date(1978, 1, 23))
-    # because_the_night = Song("Because the Night",
-    #                          performer=pattiSmithGroup,
-    #                          author=bruce_and_patti,
-    #                          duration=333,
-    #                          release_date=date(1978, 3, 2))
-    #
-    # songs = [till_victory, space_monkey, because_the_night]
-    #
-    # print('\tsongs:')                                           # test formatting a song list
-    # print(format_songs([]))
-    # print('\tsongs:')
-    # print(format_songs(songs))
+    from becausethenight.music.song import Song
+    from becausethenight.music.performer import Performer
+    from becausethenight.music.author import Author
+    from datetime import date
+
+    pattiSmithGroup = Performer("Patti Smith Group", is_band=True)
+    bruce = Author("Bruce Springsteen")
+    patti = Author("Patti Smith")
+    bruce_and_patti = Author("Bruce Springsteen, Patti Smith")
+
+    till_victory = Song("Till Victory",
+                        performer=pattiSmithGroup,
+                        author=patti,
+                        duration=370,
+                        release_date=date(1978, 2, 12))
+    space_monkey = Song("Space Monkey",
+                        performer=pattiSmithGroup,
+                        author=patti,
+                        duration=233,
+                        release_date=date(1978, 1, 23))
+    because_the_night = Song("Because the Night",
+                             performer=pattiSmithGroup,
+                             author=bruce_and_patti,
+                             duration=333,
+                             release_date=date(1978, 3, 2))
+
+    songs = [till_victory, space_monkey, because_the_night]
+
+    print('\tsongs:')                                           # test formatting a song list
+    print(format_songs([]))
+    print('\tsongs:')
+    print(format_songs(songs))
+    print()
+
+    # for song in songs:
+    #     print(song)
     # print()
-    #
-    # # for song in songs:
-    # #     print(song)
-    # # print()
-    #
-    # easter = Album('Easter')                                    # test formatting an Album object
-    # print(easter)
-    # easter = Album('Easter',
-    #                pattiSmithGroup,
-    #                songs,
-    #                2800,
-    #                date(1978, 3, 2))
-    # print(easter)
-    # print()
-    #
+
+    easter = Album('Easter')                                    # test formatting an Album object
+    print(easter)
+    easter = Album('Easter',
+                   pattiSmithGroup,
+                   songs,
+                   2800,
+                   date(1978, 3, 2))
+    print(easter)
+    print()
+
     # s = 'Rock'                                                  # demonstrate iterators
     # print('s:', s)
     # s_iterator = iter(s)
@@ -292,49 +300,49 @@ if __name__ == "__main__":
     #     # sys.stderr.write(err.message)                         # does not produce any output in PyCharm; a bug?
     # print()
 
-    print()
-    # BASE_URL = 'https://www.discogs.com'
-    # start_url = 'https://www.discogs.com/artist/193816-Patti-Smith'
-    # soup = crawl(start_url, 3)
-    start_url = 'https://theculturetrip.com/north-america/usa/new-york/articles/five-essential-patti-smith-albums/'
-    soups = crawl(start_url, 1)
-
-    for soup in soups:
-        # Just experimenting:
-        # print(type(soup))
-        # print(soup)
-        # soup_file = utility.get_data_dir() / 'soup.html'
-        # soup_file.write_text(str(soup), encoding='utf-8', errors='replace')
-
-        # a_tags = \
-        #     soup.find_all('a',
-        #                   {'class':
-        #                        "thumbnail_link thumbnail_size_small thumbnail_orientation_landscape thumbnail-lazyload "})
-        # for tag in a_tags:
-        #     tag.
-        # print(a_tags[0])
-        # print(a_tags[0].attrs)
-        # a_tags_file = utility.get_data_dir() / 'a_tags.html'
-        # a_tags_file.write_text(str(a_tags), encoding='utf-8', errors='replace')
-
-        albums = []
-        for link in soup.find_all('h2'):                        # get album titles
-            # print(link.text)
-            albums.append(link.text)
-
-        album = iter(albums)
-        for link in soup.find_all('img'):
-            # print(link)
-            src = link.get('src')
-            # print(src)
-            alt = link.get('alt')
-            # print(alt)
-            if src:
-                if alt:                                         # if alt and alt != '', but '' also evaluates to False
-                    print()
-                    if '|' in alt:
-                        print(album.__next__())
-                    print(alt)
-                    print(src)
+    # print()
+    # # BASE_URL = 'https://www.discogs.com'
+    # # start_url = 'https://www.discogs.com/artist/193816-Patti-Smith'
+    # # soup = crawl(start_url, 3)
+    # start_url = 'https://theculturetrip.com/north-america/usa/new-york/articles/five-essential-patti-smith-albums/'
+    # soups = crawl(start_url, 1)
+    #
+    # for soup in soups:
+    #     # Just experimenting:
+    #     # print(type(soup))
+    #     # print(soup)
+    #     # soup_file = utility.get_data_dir() / 'soup.html'
+    #     # soup_file.write_text(str(soup), encoding='utf-8', errors='replace')
+    #
+    #     # a_tags = \
+    #     #     soup.find_all('a',
+    #     #                   {'class':
+    #     #                        "thumbnail_link thumbnail_size_small thumbnail_orientation_landscape thumbnail-lazyload "})
+    #     # for tag in a_tags:
+    #     #     tag.
+    #     # print(a_tags[0])
+    #     # print(a_tags[0].attrs)
+    #     # a_tags_file = utility.get_data_dir() / 'a_tags.html'
+    #     # a_tags_file.write_text(str(a_tags), encoding='utf-8', errors='replace')
+    #
+    #     albums = []
+    #     for link in soup.find_all('h2'):                        # get album titles
+    #         # print(link.text)
+    #         albums.append(link.text)
+    #
+    #     album = iter(albums)
+    #     for link in soup.find_all('img'):
+    #         # print(link)
+    #         src = link.get('src')
+    #         # print(src)
+    #         alt = link.get('alt')
+    #         # print(alt)
+    #         if src:
+    #             if alt:                                         # if alt and alt != '', but '' also evaluates to False
+    #                 print()
+    #                 if '|' in alt:
+    #                     print(album.__next__())
+    #                 print(alt)
+    #                 print(src)
 
 

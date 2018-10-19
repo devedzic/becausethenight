@@ -1,4 +1,5 @@
-"""Utility functions of the package music"""
+"""Utility functions of the package music
+"""
 
 from becausethenight import settings
 from becausethenight.music import song
@@ -21,7 +22,8 @@ def format_duration(seconds):
 
 
 def format_date(a_date):
-    """Converts a date from datetime.date() to a string of the form '<month> <day>, <year>'."""
+    """Converts a date from datetime.date() to a string of the form '<month> <day>, <year>'.
+    """
 
     if isinstance(a_date, date):
         return a_date.strftime("%b %d, %Y")
@@ -29,16 +31,17 @@ def format_date(a_date):
         return 'unknown'
 
 
-def alive_or_deceased(alive):
-    """Converts the status of being alive or deceased from boolean to string."""
-
-    if isinstance(alive, bool):
-        return 'alive' if alive else 'deceased'
-    elif isinstance(alive, Lives):
-        return 'alive' if alive == Lives.ALIVE else 'deceased'
-    else:
-        return 'Alive/Deceased: unknown'
-
+# def alive_or_deceased(alive):
+#     """Converts the status of being alive or deceased from boolean to string.
+#     """
+#
+#     if isinstance(alive, bool):
+#         return 'alive' if alive else 'deceased'
+#     elif isinstance(alive, Lives):
+#         return 'alive' if alive == Lives.ALIVE else 'deceased'
+#     else:
+#         return 'Alive/Deceased: unknown'
+#
     # Alternatively:
     # if isinstance(alive, bool):
     #     if alive:
@@ -55,7 +58,8 @@ def alive_or_deceased(alive):
 
 
 class Lives(Enum):
-    """The enum indicating the status of being alive or deceased."""
+    """The enum indicating the status of being alive or deceased.
+    """
 
     ALIVE = 1
     DECEASED = 2
@@ -105,17 +109,20 @@ class Lives(Enum):
 
 
 def date_py_to_json(a_date):
-    """Converts datetime.date objects to JSON."""
+    """Converts datetime.date objects to JSON.
+    """
 
     return a_date.isoformat() if isinstance(a_date, date) else 'null'
 
 
 def date_json_to_py(iso_date):
     """Converts string formatted as 'YYYY-mm-dd' to datetime.date object.
+    """
 
-    The following return statement works with Python 3.7, PyCharm build of Sep 04, 2018,
+    """The following return statement works with Python 3.7, PyCharm build of Sep 04, 2018,
     although the editor/autocomplete does not recognize date.fromisoformat() and highlights it yellow.
-    After reporting the bug to JetBrains, their answer of Sep 17 was that the bug was 'updated'."""
+    After reporting the bug to JetBrains, their answer of Sep 17 was that the bug was 'updated'.
+    """
 
     return date.fromisoformat(iso_date)
 
@@ -125,14 +132,16 @@ def date_json_to_py(iso_date):
 
 
 def get_project_dir():
-    """Returns the Path object corresponding to the project root directory."""
+    """Returns the Path object corresponding to the project root directory.
+    """
 
     return Path(settings.PROJECT_DIR)
 
 
 def get_data_dir():
     """Returns the Path object corresponding to the data directory
-    (by convention located right under the project root directory)."""
+    (by convention located right under the project root directory).
+    """
 
     data_dir = get_project_dir() / 'data'
     data_dir.mkdir(parents=True, exist_ok=True)

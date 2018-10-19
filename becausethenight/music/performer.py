@@ -1,4 +1,5 @@
-"""Domain classes and functions related to the concept of performer"""
+"""Domain classes and functions related to the concept of performer
+"""
 
 
 # from becausethenight.util import utility
@@ -9,7 +10,8 @@ import json
 class Performer:
     """The class describing the concept of performer.
     It is assumed that a performer is sufficiently described by their
-    name and whether it is a solo performer or a band."""
+    name and whether it is a solo performer or a band.
+    """
 
     definition = "An artist in performing arts. In this project, they perform music."
 
@@ -20,7 +22,8 @@ class Performer:
     def __str__(self):
         # return self.name + ', ' + utility.format_performer_type(self.is_band)
         # return utility.format_performer_type(self)
-        return format_performer_type(self)
+        # return format_performer_type(self)
+        return self.name + ' (band)' if self.is_band else self.name + ' (musician)'
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
@@ -29,6 +32,12 @@ class Performer:
             return True
         else:
             return False
+
+    def format_performer(self):
+        """Converts performer object to its name field, for printing purposes.
+        """
+
+        return self.name if self.name else 'unknown'
 
     # def py_to_json(self):                                                   # developed just for initial testing
     #     # return self.__dict__
@@ -53,38 +62,41 @@ class Performer:
     #     # return Performer(d['name'], d['is_band'])
 
 
-def format_performer(performer):
-    """Converts performer object to its name field, for printing purposes."""
+# def format_performer(performer):
+#     """Converts performer object to its name field, for printing purposes.
+#     """
+#
+#     return performer.name if isinstance(performer, Performer) else 'unknown'
+#
+#     # Alternatively:
+#     # if isinstance(performer, Performer):
+#     #     return performer.name
+#     # else:
+#     #     return 'unknown'
 
-    return performer.name if isinstance(performer, Performer) else 'unknown'
 
-    # Alternatively:
-    # if isinstance(performer, Performer):
-    #     return performer.name
-    # else:
-    #     return 'unknown'
-
-
-def format_performer_type(performer):
-    """Converts the flag of performer type from boolean to string, if needed."""
-
-    if isinstance(performer, Performer):
-        return performer.name + ' (band)' if performer.is_band else performer.name + ' (musician)'
-    else:
-        return 'unknown if band or musician'
-
-    # Alternatively:
-    # if isinstance(performer, Performer):
-    #     if performer.is_band:
-    #         return performer.name + ' (band)'
-    #     else:
-    #         return performer.name + ' (musician)'
-    # else:
-    #     return 'unknown if band or musician'
+# def format_performer_type(performer):
+#     """Converts the flag of performer type from boolean to string, if needed.
+#     """
+#
+#     if isinstance(performer, Performer):
+#         return performer.name + ' (band)' if performer.is_band else performer.name + ' (musician)'
+#     else:
+#         return 'unknown if band or musician'
+#
+#     # Alternatively:
+#     # if isinstance(performer, Performer):
+#     #     if performer.is_band:
+#     #         return performer.name + ' (band)'
+#     #     else:
+#     #         return performer.name + ' (musician)'
+#     # else:
+#     #     return 'unknown if band or musician'
 
 
 class PerformerEncoder(json.JSONEncoder):
-    """JSON encoder for Performer objects."""
+    """JSON encoder for Performer objects.
+    """
 
     def default(self, o):
         if isinstance(o, Performer):
@@ -94,7 +106,8 @@ class PerformerEncoder(json.JSONEncoder):
 
 
 def json_to_py(performer_json):
-    """JSON decoder for Performer objects (object_hook parameter in json.loads())."""
+    """JSON decoder for Performer objects (object_hook parameter in json.loads()).
+    """
 
     if '__Performer__' in performer_json:
         performer = Performer('')
@@ -149,7 +162,6 @@ if __name__ == "__main__":
     for performer in performers:
         print(performer)
     print()
-
 
     # bruceSpringsteen_json = bruceSpringsteen.py_to_json()   # test JSON serialization/deserialization (init. ver.)
     # print('bruceSpringsteen.py_to_json():')

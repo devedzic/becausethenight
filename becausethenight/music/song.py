@@ -1,14 +1,16 @@
-"""Domain classes and functions related to the concept of song"""
+"""Domain classes and functions related to the concept of song
+"""
 
 
 from becausethenight.util import utility
-from becausethenight.music import performer, author
+from becausethenight.music.author import Author
 
 
 class Song:
     """The class describing the concept of song.
     It is assumed that a song is sufficiently described by its
-    title, performer, author, duration and release date."""
+    title, performer, author, duration and release date.
+    """
 
     definition = "A single (and often standalone) work of music, " \
                  "typically intended to be sung by the human voice..."
@@ -22,8 +24,8 @@ class Song:
 
     def __str__(self):
         return (self.title + '\n' +
-                '\t' + 'performer(s): ' + performer.format_performer_type(self.performer) + '\n' +
-                '\t' + 'author(s): ' + author.format_author(self.author) + '\n' +
+                '\t' + 'performer(s): ' + str(self.performer) + '\n' +
+                '\t' + 'author(s): ' + Author.format_author(self.author) + '\n' +
                 # '\t' + 'duration: ' + str(self.duration) + '\n' +
                 # '\t' + 'duration: ' + "%d:%02d" % divmod(self.duration, 60) + '\n' +
                 '\t' + 'duration: ' + utility.format_duration(self.duration) + '\n' +
@@ -41,7 +43,7 @@ class Song:
     def play(self):
         # print('Playing:', self.author + ' - ', self.title + '...')
         # print('Playing:', str(self.author) + ' -', self.title + '...')
-        print('Playing:', author.format_author(self.author) + ' -', self.title + '...')
+        print('Playing:', Author.format_author(self.author) + ' -', self.title + '...')
 
 # The following functions have been moved to the utils.utility module:
 
@@ -126,12 +128,12 @@ if __name__ == "__main__":
     # print()
 
     print('Writing to a binary file...')                # demonstrate writing to a binary file
-    with open('because_the_night.txt', 'wb') as outfile:
+    with open('because_the_night', 'wb') as outfile:
         outfile.write(str.encode(str(because_the_night)))
     print()
 
-    print('Reading from a text file...')                # demonstrate reading from a binary file
-    with open('because_the_night.txt', 'rb') as infile:
+    print('Reading from a binary file...')                # demonstrate reading from a binary file
+    with open('because_the_night', 'rb') as infile:
         s = infile.read()
     print(s)
     print()
