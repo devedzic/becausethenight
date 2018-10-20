@@ -1,8 +1,10 @@
-'''Demonstrates peculiarities of if, for, while and other statements'''
+"""Demonstrates peculiarities of if, for, while and other statements
+"""
 
 
 def demonstrate_branching():
-    '''Details and peculiarities of if statements.'''
+    """Details and peculiarities of if statements.
+    """
 
     because_the_night = 'Because the Night'
     because_the_Night = 'Because the Night'                 # id()'s are the same for equal strings!
@@ -38,7 +40,8 @@ def demonstrate_branching():
 
 
 def demonstrate_loops():
-    '''Different kinds of loops. Also break and continue.'''
+    """Different kinds of loops. Also break and continue.
+    """
 
     songs = ["Till Victory", "Space Monkey", "Because the Night", "Rock 'n' Roll Nigger", "Ghost Dance"]
 

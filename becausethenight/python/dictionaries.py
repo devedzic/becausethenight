@@ -1,8 +1,10 @@
-'''Demonstrates dictionaries'''
+"""Demonstrates dictionaries
+"""
 
 
 def demonstrate_dictionaries():
-    '''Creating and using dictionaries.'''
+    """Creating and using dictionaries.
+    """
 
     blank_dictionary = {}                                       # create a blank (empty) dictionary
     print('blank_dictionary:', blank_dictionary)
@@ -16,7 +18,7 @@ def demonstrate_dictionaries():
     }
                                                                 # print a non-empty dictionary
     print('Dictionary because_the_night:', because_the_night)
-    print('items():', because_the_night.items())                # print all items using the items() f.
+    print('items():', because_the_night.items())                # print all items using the items() function
     print('Dictionary because_the_night, item by item:')        # print one item per line
     for k, v in because_the_night.items():
         print(k + ': ', v)
@@ -50,8 +52,10 @@ def demonstrate_dictionaries():
     # pprint(because_the_night.items())
     # print(because_the_night.items())
 
+
 def sort_dictionary(d, by):
-    '''Sorting a dictionary by keys or by values'''
+    """Sorting a dictionary by keys or by values.
+    """
 
     if by == 'k':
         d_sorted = sorted(zip(d.keys(), d.values()))
@@ -76,8 +80,10 @@ def sort_dictionary(d, by):
     #     return None
     return d_sorted
 
+
 def demonstrate_dict_sorting():
-    '''Demonstrate sorting a dictionary'''
+    """Demonstrate sorting a dictionary.
+    """
 
     because_the_night = {'author_1': 'Bruce Springsteen',
                          'author_2': 'Patti Smith',

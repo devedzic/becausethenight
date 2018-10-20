@@ -1,8 +1,10 @@
-'''Demonstrates sets'''
+"""Demonstrates sets
+"""
 
 
 def demonstrate_sets():
-    '''Creating and using sets.'''
+    """Creating and using sets.
+    """
 
     bruce = {'Bruce', 'Springsteen', 'Bruce'}
     print('No duplicates:', bruce)
