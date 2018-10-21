@@ -1,15 +1,18 @@
-"""Demonstrates how operators and expressions work in Python"""
+"""Demonstrates how operators and expressions work in Python
+"""
 
 
 def demonstrate_arithmetic_operators():
-    """Working with arithmetic operators."""
+    """Working with arithmetic operators.
+    """
 
     a = ((7//3)**3) % 3 + 2                 # the result should be 4
     print('Result:', a)
 
 
 def demonstrate_relational_operators():
-    """Working with relational operators."""
+    """Working with relational operators.
+    """
 
     if 1 >= 3:
         print('1 >= 3')
@@ -46,7 +49,8 @@ def demonstrate_relational_operators():
 
 
 def demonstrate_logical_operators():
-    """Working with logical operators."""
+    """Working with logical operators.
+    """
 
     print('True and False:', True and False)
     print('True or False:', True or False)

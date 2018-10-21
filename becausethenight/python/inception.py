@@ -5,7 +5,8 @@ and improved with   if __name__ == "__main__":
 
 
 def print_it():
-    """A simple function that demonstrates print()."""
+    """A simple function that demonstrates print().
+    """
 
     print("Because the Night")
     print()

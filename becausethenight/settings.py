@@ -1,4 +1,5 @@
-"""Project configuration settings."""
+"""Project configuration settings
+"""
 
 
 import os

@@ -3,7 +3,8 @@
 
 
 def demonstrate_lists():
-    """Using just the simplest operations with lists."""
+    """Using just the simplest operations with lists.
+    """
 
     list_with_diverse_elements = ["Patti Smith", "Bruce Springsteen", 1978]                     # creating non-empty l.
     print(list_with_diverse_elements[0])                                                        # accessing elements
@@ -66,7 +67,8 @@ def demonstrate_list_methods():
 
 
 def demonstrate_arrays():
-    """Using array.array() to build list-based numeric arrays."""
+    """Using array.array() to build list-based numeric arrays.
+    """
 
     from array import array
     a = array('i', [1, -92, 3])                                             # 'i' - int; 'd' - double; etc.
@@ -79,7 +81,8 @@ def demonstrate_arrays():
 
 
 def populate_empty_list():
-    """Creating an empty list and populating it with random values."""
+    """Creating an empty list and populating it with random values.
+    """
 
     import random
     list_with_random_values = []                                            # create an empty list
@@ -92,7 +95,8 @@ def populate_empty_list():
 
 
 def duplicate_list():
-    """Duplicating lists (carefully :))"""
+    """Duplicating lists (carefully :))
+    """
 
     listA = [1, 2, 3]
     listB = listA                                           # NO!!! it only copies pointers/references!
@@ -110,7 +114,8 @@ def duplicate_list():
 
 
 def demonstrate_list_comprehension():
-    """Showing examples of list comprehension."""
+    """Showing examples of list comprehension.
+    """
 
     from array import array
     a = array('i', [1, -92, 3])                                             # 'i' - int; 'd' - double; etc.

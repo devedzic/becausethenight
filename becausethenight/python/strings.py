@@ -5,7 +5,8 @@ import string
 
 
 def demonstrate_formatting():
-    """Using classical formatting."""
+    """Using classical formatting.
+    """
 
     print("%7.3f, %5s" % (4/3, 'ee'))
     print('I love \t\t\'Because the Night\'')
@@ -43,7 +44,8 @@ def demonstrate_formatting():
 
 
 def demonstrate_fancy_formatting():
-    """Using "fancy" formatting."""
+    """Using "fancy" formatting.
+    """
 
     patti = "Patti Smith"
     # print('{0}, {1}, {2}'.format(patti, ': ', "Because the Night"))
@@ -53,7 +55,8 @@ def demonstrate_fancy_formatting():
 
 
 def demonstrate_string_operations():
-    """Using different string operations."""
+    """Using different string operations.
+    """
 
     song = 'Because the Night'
     if song.endswith('Night'):

@@ -1,4 +1,5 @@
-"""main.py - the starting point"""
+"""main.py - the starting point
+"""
 
 
 # Hello World

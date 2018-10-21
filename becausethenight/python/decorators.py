@@ -1,19 +1,22 @@
 """Demonstrates pass, returning None, functions as parameters of other functions,
-functions as return values of other functions, user-defined and built-in decorators and lambdas"""
+functions as return values of other functions, user-defined and built-in decorators and lambdas
+"""
 
 
 import functools
 
 
 def return_None():
-    """Demonstrates returning None and the pass statement."""
+    """Demonstrates returning None and the pass statement.
+    """
 
     # print(None)
     pass
 
 
 def pass_function_as_parameter(f, *args):
-    """Demonstrates using another function as a parameter. It works because functions are objects."""
+    """Demonstrates using another function as a parameter. It works because functions are objects.
+    """
 
     f(*args)
 
@@ -23,7 +26,8 @@ def pass_function_as_parameter(f, *args):
 
 
 def return_function(full_name, first_name_flag):
-    """Demonstrates using a function as the return value from another function."""
+    """Demonstrates using a function as the return value from another function.
+    """
 
     name = full_name.split()
 
@@ -41,7 +45,8 @@ def return_function(full_name, first_name_flag):
 
 def return_function_with_args(*args):
     """Demonstrates using a function as the return value from another function.
-    The returned function has parameters/arguments"""
+    The returned function has parameters/arguments.
+    """
 
     def return_empty():
         return []
@@ -67,6 +72,7 @@ def show_author(artwork_f):
             return value
         return wrapper_decorator
     """
+
     @functools.wraps(artwork_f)
     def wrapper(*args):
         # Do something before

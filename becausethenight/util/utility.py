@@ -13,7 +13,8 @@ from collections import Counter
 
 
 def format_duration(seconds):
-    """Converts a duration from seconds to string of the form '<mm>:<ss>'."""
+    """Converts a duration from seconds to string of the form '<mm>:<ss>'.
+    """
 
     if seconds > 0:
         return "%d:%02d" % divmod(seconds, 60)

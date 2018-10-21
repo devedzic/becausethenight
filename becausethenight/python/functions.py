@@ -1,23 +1,29 @@
-'''Demonstrates details of writing Python functions: annotations, default args, kwargs'''
+"""Demonstrates details of writing Python functions: annotations, default args, kwargs
+"""
 
 
 def demonstrate_annotations(artist: str, song: str = 'Because the Night') -> str:
-    '''Demonstrates how to use annotations of function parameters/arguments and of function return type.'''
+    """Demonstrates how to use annotations of function parameters/arguments and of function return type.
+    """
 
     print("Annotations:", demonstrate_annotations.__annotations__)
     print(r'Parameters/Arguments:', 'artist:', artist + ',', 'song:', song)
     return artist + ', ' + song
 
-def show_song(artist, song ='Because the Night', duration = 180):
-    '''Demonstrates default arguments/parameters'''
+
+def show_song(artist, song='Because the Night', duration=180):
+    """Demonstrates default arguments/parameters.
+    """
 
     print(artist, end=': ')
     print(song, end=', ')
     print(duration)
     print()
 
+
 def use_flexible_arg_list(prompt: str, *songs):
-    '''Demonstrates flexible number of arguments/parameters'''
+    """Demonstrates flexible number of arguments/parameters.
+    """
 
     # songs = list(songs)                                   # not necessary, although improves readability
     print(prompt + ': ', end='')
@@ -26,8 +32,10 @@ def use_flexible_arg_list(prompt: str, *songs):
     print('...')
     print()
 
-def use_all_categories_of_args(prompt, *albums, song = 'Because the Night', **authors):
-    '''Demonstrates positional args, flexible args, keyword args, and kwargs (flexible keyword args).'''
+
+def use_all_categories_of_args(prompt, *albums, song='Because the Night', **authors):
+    """Demonstrates positional args, flexible args, keyword args, and kwargs (flexible keyword args).
+    """
 
     print(prompt + ': ', end='')
     if len(albums) != 0:
