@@ -9,6 +9,14 @@ import json
 from becausethenight.util import utility
 
 
+class Lives(Enum):
+    """The enum indicating the status of being alive or deceased.
+    """
+
+    ALIVE = 1
+    DECEASED = 2
+
+
 class Genre(Enum):
     """The enum indicating the music genres that the music package accepts.
     """
@@ -44,7 +52,7 @@ class PoetryType(Enum):
 class Author:
     """The class describing the concept of author.
     It is assumed that an author is sufficiently described by his/her
-    name, age, birth date, birth place, nationality, and whether he/she is still living or is deceased.
+    name, birth date, birth place, nationality, and whether he/she is still living or is deceased.
     """
 
     definition = "Creator or originator of an artwork."
@@ -58,11 +66,9 @@ class Author:
     #     self.alive = alive
 
     # def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True):
-    def __init__(self, name, birth_date=None, birth_place='unknown', nationality='unknown', alive=True):
+    def __init__(self, name, birth_date=None, birth_place='unknown', nationality='unknown', alive=Lives.ALIVE):
 
-        # self.__name = name
         self.name = name
-        # self.age = age
         self.birth_date = birth_date
         self.__age = self.age
         self.birth_place = birth_place
@@ -75,10 +81,9 @@ class Author:
 
     @name.setter
     def name(self, name):
-        if isinstance(name, str) and name != '':
-            self.__name = name
-        else:
-            self.__name == 'unknown'
+        self.__name = name
+        if not isinstance(name, str) or name == '':
+            self.__name = 'unknown'
 
     @property
     def age(self):
@@ -192,14 +197,6 @@ class Author:
     #     return 'Alive/Deceased: unknown'
 
 
-class Lives(Enum):
-    """The enum indicating the status of being alive or deceased.
-    """
-
-    ALIVE = 1
-    DECEASED = 2
-
-
 class AuthorEncoder(json.JSONEncoder):
     """JSON encoder for Author objects.
     """
@@ -240,9 +237,13 @@ class Musician(Author):
 
     definition = "A person who composes, conducts, or performs music."
 
-    def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
+    # def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
+    #              genre=Genre.ROCK, instrument=Instrument.GUITAR):
+    #     super().__init__(name, age, birth_date, birth_place, nationality, alive)
+
+    def __init__(self, name, birth_date=None, birth_place='unknown', nationality='unknown', alive=Lives.ALIVE,
                  genre=Genre.ROCK, instrument=Instrument.GUITAR):
-        super().__init__(name, age, birth_date, birth_place, nationality, alive)
+        super().__init__(name, birth_date, birth_place, nationality, alive)
         self.genre = genre
         self.instrument = instrument
 
@@ -254,6 +255,26 @@ class Musician(Author):
     def __eq__(self, other):
         return super().__eq__(other)
 
+    @property
+    def genre(self):
+        return self.__genre
+
+    @genre.setter
+    def genre(self, genre):
+        self.__genre = genre
+        if not isinstance(genre, Genre):
+            self.__genre = Genre.ROCK                           # default genre: ROCK
+
+    @property
+    def instrument(self):
+        return self.__instrument
+
+    @instrument.setter
+    def instrument(self, instrument):
+        self.__instrument = instrument
+        if not isinstance(instrument, Instrument):
+            self.__instrument = Instrument.GUITAR               # default instrument: GUITAR
+
 
 class Poet(Author):
     """The class describing the concept of poet.
@@ -263,9 +284,9 @@ class Poet(Author):
 
     definition = "A person who creates poetry."
 
-    def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
+    def __init__(self, name, birth_date=None, birth_place='unknown', nationality='unknown', alive=Lives.ALIVE,
                  poetry=PoetryType.LYRIC):
-        super().__init__(name, age, birth_date, birth_place, nationality, alive)
+        super().__init__(name, birth_date, birth_place, nationality, alive)
         self.poetry = poetry
 
     def __str__(self):
@@ -275,6 +296,16 @@ class Poet(Author):
     def __eq__(self, other):
         return super().__eq__(other)
 
+    @property
+    def poetry(self):
+        return self.__poetry
+
+    @poetry.setter
+    def poetry(self, poetry):
+        self.__poetry = poetry
+        if not isinstance(poetry, PoetryType):
+            self.__poetry = PoetryType.LYRIC
+
 
 class SingerSongwriter(Musician, Poet):
     """The class describing the concept of poet.
@@ -283,10 +314,10 @@ class SingerSongwriter(Musician, Poet):
 
     definition = "A musician who writes, composes, and performs their own musical material (both lyrics and melodies)."
 
-    def __init__(self, name, age=0, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
+    def __init__(self, name, birth_date=None, birth_place='unknown', nationality='unknown', alive=True,
                  genre=Genre.ROCK, instrument=Instrument.GUITAR, poetry=PoetryType.LYRIC):
         Poet.__init__(self, name, poetry=poetry)
-        Musician.__init__(self, name, age, birth_date, birth_place, nationality, alive, genre, instrument)
+        Musician.__init__(self, name, birth_date, birth_place, nationality, alive, genre, instrument)
 
     def __str__(self):
         return (Musician.__str__(self) + '\n' +
@@ -317,32 +348,38 @@ if __name__ == "__main__":
     # else:
     #     print(False)
     # print()
-    #
-    # lennyKaye = Musician('Lenny Kaye', 70,                                  # test Musician
+
+    # lennyKaye = Musician('Lenny Kaye',                                      # test Musician
     #                      date(1948, 2, 21),
     #                      'New York City', 'US')
     # print(lennyKaye)
     #
-    # lenny = Musician('Lenny Kaye', 70,
+    # lenny = Musician('Lenny Kaye',
     #                  date(1948, 2, 21))
     # if lennyKaye == lenny:
     #     print('eq')
     # else:
     #     print('not eq')
     # print()
-    #
-    # edgarAllanPoe = Poet('Edgar Allan Poe', -1,                             # test Poet
+
+    # edgarAllanPoe = Poet('Edgar Allan Poe',                                 # test Poet
     #                      date(1809, 1, 19),
-    #                      'Boston', 'US', False)
+    #                      'Boston', 'US', Lives.DECEASED)
     # print(edgarAllanPoe)
     # print()
-    #
-    # jonathanWilson = SingerSongwriter('Jonathan Wilson', 50,                # test SingerSongwriter (mult. inheritance)
-    #                                   date(1968, 5, 29),
-    #                                   'Boston', 'US', False)
-    # print(jonathanWilson)
-    # print()
-    #
+
+    jonathanWilson = SingerSongwriter('Jonathan Wilson',                    # test SingerSongwriter (mult. inheritance)
+                                      date(1968, 5, 29),
+                                      'Boston', 'US', Lives.ALIVE)
+    print(jonathanWilson)
+
+    jWilson = SingerSongwriter('Jonathan Wilson',                           # test super().__eq__()
+                               date(1968, 5, 29),
+                               'Boston', 'US', Lives.ALIVE)
+    if jonathanWilson == jWilson:
+        print(True)
+    print()
+
     # print(edgarAllanPoe.name)                                               # test name property (step through code)
     # edgarAllanPoe.name = 'E. A. Poe'
     # print(edgarAllanPoe.name)
@@ -387,14 +424,20 @@ if __name__ == "__main__":
     #                           'US',
     #                           Lives.ALIVE)
 
-    bruceSpringsteen = Author('Bruce Springsteen',
-                              date(1949, 9, 23),
-                              'Freehold',
-                              'US',
-                              Lives.ALIVE)
-    print(bruceSpringsteen)
-    print(bruceSpringsteen.name)
-    print()
+    # bruceSpringsteen = Author(name='Bruce Springsteen',
+    #                           birth_date=date(1949, 9, 23),
+    #                           birth_place='Freehold',
+    #                           nationality='US',
+    #                           alive=Lives.ALIVE)
+    # bruceSpringsteen = Author('Bruce Springsteen',
+    #                           date(1949, 9, 23),
+    #                           'Freehold',
+    #                           'US',
+    #                           Lives.ALIVE)
+    # print(bruceSpringsteen)
+    # print(bruceSpringsteen.name)
+    # print(bruceSpringsteen.age)
+    # print()
 
     # bruceSpringsteen_json = json.dumps(bruceSpringsteen,                    # test JSON serialization/deserialization
     #                                    indent=4,
