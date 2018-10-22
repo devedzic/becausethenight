@@ -78,7 +78,7 @@ def sort_dictionary(d, by):
     #     d_sorted = sorted(d.items(), key=lambda item:item[1])
     # else:
     #     return None
-    return d_sorted
+    return dict(d_sorted)                                         # d_sorted is a list, dict(d_sorted) is a dictionary
 
 
 def demonstrate_dict_sorting():
