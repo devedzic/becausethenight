@@ -70,7 +70,7 @@ class Author:
 
         self.name = name
         self.birth_date = birth_date
-        self.__age = self.age
+        # self.__age = self.age
         self.birth_place = birth_place
         self.nationality = nationality
         self.alive = alive
@@ -81,8 +81,13 @@ class Author:
 
     @name.setter
     def name(self, name):
-        self.__name = name
-        if not isinstance(name, str) or name == '':
+        # self.__name = name
+        # if not isinstance(name, str) or name == '':
+        #     self.__name = 'unknown'
+
+        if isinstance(name, str) and name != '':
+            self.__name = name
+        else:
             self.__name = 'unknown'
 
     @property
@@ -92,7 +97,8 @@ class Author:
     def __str__(self):
         return (self.__name + '\n' +
                 '\t' + 'born: ' + utility.format_date(self.birth_date) + '\n' +
-                '\t' + 'age: ' + str(self.__age) + '\n' +
+                # '\t' + 'age: ' + str(self.__age) + '\n' +
+                '\t' + 'age: ' + str(self.age) + '\n' +
                 '\t' + 'place of birth: ' + str(self.birth_place) + '\n' +
                 '\t' + 'nationality: ' + str(self.nationality) + '\n' +
                 '\t' + Author.alive_or_deceased(self.alive))
@@ -368,17 +374,17 @@ if __name__ == "__main__":
     # print(edgarAllanPoe)
     # print()
 
-    jonathanWilson = SingerSongwriter('Jonathan Wilson',                    # test SingerSongwriter (mult. inheritance)
-                                      date(1968, 5, 29),
-                                      'Boston', 'US', Lives.ALIVE)
-    print(jonathanWilson)
-
-    jWilson = SingerSongwriter('Jonathan Wilson',                           # test super().__eq__()
-                               date(1968, 5, 29),
-                               'Boston', 'US', Lives.ALIVE)
-    if jonathanWilson == jWilson:
-        print(True)
-    print()
+    # jonathanWilson = SingerSongwriter('Jonathan Wilson',                    # test SingerSongwriter (mult. inheritance)
+    #                                   date(1968, 5, 29),
+    #                                   'Boston', 'US', Lives.ALIVE)
+    # print(jonathanWilson)
+    #
+    # jWilson = SingerSongwriter('Jonathan Wilson',                           # test super().__eq__()
+    #                            date(1968, 5, 29),
+    #                            'Boston', 'US', Lives.ALIVE)
+    # if jonathanWilson == jWilson:
+    #     print(True)
+    # print()
 
     # print(edgarAllanPoe.name)                                               # test name property (step through code)
     # edgarAllanPoe.name = 'E. A. Poe'
@@ -429,15 +435,15 @@ if __name__ == "__main__":
     #                           birth_place='Freehold',
     #                           nationality='US',
     #                           alive=Lives.ALIVE)
-    # bruceSpringsteen = Author('Bruce Springsteen',
-    #                           date(1949, 9, 23),
-    #                           'Freehold',
-    #                           'US',
-    #                           Lives.ALIVE)
-    # print(bruceSpringsteen)
-    # print(bruceSpringsteen.name)
-    # print(bruceSpringsteen.age)
-    # print()
+    bruceSpringsteen = Author('',
+                              date(1949, 9, 23),
+                              'Freehold',
+                              'US',
+                              Lives.ALIVE)
+    print(bruceSpringsteen)
+    print(bruceSpringsteen.name)
+    print(bruceSpringsteen.age)
+    print()
 
     # bruceSpringsteen_json = json.dumps(bruceSpringsteen,                    # test JSON serialization/deserialization
     #                                    indent=4,
