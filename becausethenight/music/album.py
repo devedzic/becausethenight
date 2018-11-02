@@ -13,7 +13,7 @@ class Album:
 
     definition = 'A collection of audio recordings issued as a single item on CD, record, audio tape or another medium.'
 
-    def __init__(self, title='', performer=None, songs=[], duration=0, release_date=None):
+    def __init__(self, title='', performer=None, songs=None, duration=0, release_date=None):
         self.title = title
         self.performer = performer
         self.songs = songs
@@ -23,20 +23,25 @@ class Album:
         self.__i = 0                                            # iterator index
 
     def __str__(self):
-        return (self.title + '\n' +
-                '\t' + 'performer(s): ' + str(self.performer) + '\n' +
-                '\t' + 'songs:' + '\n' +
-                format_songs(self.songs) + '\n' +
-                '\t' + 'duration: ' + utility.format_duration(self.duration) + '\n' +
-                '\t' + 'released: ' + utility.format_date(self.release_date))
+        # return (self.title + '\n' +
+        #         '\t' + 'performer(s): ' + str(self.performer) + '\n' +
+        #         '\t' + 'songs:' + '\n' +
+        #         format_songs(self.songs) + '\n' +
+        #         '\t' + 'duration: ' + utility.format_duration(self.duration) + '\n' +
+        #         '\t' + 'released: ' + utility.format_date(self.release_date))
+        return '{}\n\tperformer(s): {}\n\tsongs:\n\t\t{}\n\tduration: {}\n\trelease date: {}\n'.\
+            format(self.title, Performer.format_performer(self.performer), format_songs(self.songs),
+                   utility.format_duration(self.duration), utility.format_date(self.release_date))
 
     def __eq__(self, other):
-        if self.__class__ != other.__class__:
-            return False
-        if (self.title == other.title) and (self.performer == other.performer):
-            return True
-        else:
-            return False
+        # if self.__class__ != other.__class__:
+        #     return False
+        # if (self.title == other.title) and (self.performer == other.performer):
+        #     return True
+        # else:
+        #     return False
+        return True if isinstance(other, Album) and other.title == self.title and other.performer == self.performer \
+            else False
 
     def __iter__(self):
         return self
@@ -81,10 +86,12 @@ def format_songs(songs):
     """Formats the album's song list for __str__().
     """
 
-    if isinstance(songs, list) and songs != []:
-        return '\t\t' + '\n\t\t'.join(song.title for song in songs)
-    else:
-        return '\t\t' + 'not specified'
+    # if isinstance(songs, list) and songs != []:
+    #     return '\t\t' + '\n\t\t'.join(song.title for song in songs)
+    # else:
+    #     return '\t\t' + 'not specified'
+    return '\n\t\t'.join(song.title for song in songs) if isinstance(songs, list) and songs != [] \
+        else '\n\t\tnot specified'
 
 
 def generate_songs(songs):

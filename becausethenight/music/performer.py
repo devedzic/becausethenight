@@ -19,25 +19,46 @@ class Performer:
         self.name = name
         self.is_band = is_band
 
+    # def __str__(self):
+    #     # return self.name + ', ' + utility.format_performer_type(self.is_band)
+    #     # return utility.format_performer_type(self)
+    #     # return format_performer_type(self)
+    #     return self.name + ' (band)' if self.is_band else self.name + ' (musician)'
+
     def __str__(self):
-        # return self.name + ', ' + utility.format_performer_type(self.is_band)
-        # return utility.format_performer_type(self)
-        # return format_performer_type(self)
-        return self.name + ' (band)' if self.is_band else self.name + ' (musician)'
+        return 'unknown' if not isinstance(self.name, str) or self.name == '' \
+                         else self.name + (' (band)' if self.is_band else ' (musician)')
+
+    # def __eq__(self, other):
+    #     if self.__class__ != other.__class__:
+    #         return False
+    #     if (self.name == other.name) and (self.is_band == other.is_band):
+    #         return True
+    #     else:
+    #         return False
 
     def __eq__(self, other):
-        if self.__class__ != other.__class__:
-            return False
-        if (self.name == other.name) and (self.is_band == other.is_band):
-            return True
-        else:
-            return False
+        if not isinstance(other, Performer):
+            return None
+        return True if self.name == other.name else False
 
-    def format_performer(self):
-        """Converts performer object to its name field, for printing purposes.
-        """
+    # def format_performer(self):
+    #     """Converts performer object to its name field, for printing purposes.
+    #     IT MAKES SENSE FOR THIS METHOD TO BE A STATIC METHOD.
+    #     """
+    #
+    #     return self.name if self.name else 'unknown'
 
-        return self.name if self.name else 'unknown'
+    # @staticmethod
+    # def format_performer(performer):
+    #     """Converts performer object to its name field, for printing purposes.
+    #     """
+    #
+    #     return performer.name if performer.name else 'unknown'
+
+    @staticmethod
+    def format_performer(performer):
+        return performer.name if isinstance(performer, Performer) and performer.name else 'unknown'
 
     # def py_to_json(self):                                                   # developed just for initial testing
     #     # return self.__dict__

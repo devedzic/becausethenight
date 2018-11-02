@@ -85,31 +85,41 @@ class Author:
         # if not isinstance(name, str) or name == '':
         #     self.__name = 'unknown'
 
-        if isinstance(name, str) and name != '':
-            self.__name = name
-        else:
-            self.__name = 'unknown'
+        # if isinstance(name, str) and name != '':
+        #     self.__name = name
+        # else:
+        #     self.__name = 'unknown'
+        self.__name = name if name and isinstance(name, str) else 'unknown'
 
     @property
     def age(self):
         return date.today().year - self.birth_date.year if isinstance(self.birth_date, date) else 'unknown'
 
+    # def __str__(self):
+    #     return (self.__name + '\n' +
+    #             '\t' + 'born: ' + utility.format_date(self.birth_date) + '\n' +
+    #             # '\t' + 'age: ' + str(self.__age) + '\n' +
+    #             '\t' + 'age: ' + str(self.age) + '\n' +
+    #             '\t' + 'place of birth: ' + str(self.birth_place) + '\n' +
+    #             '\t' + 'nationality: ' + str(self.nationality) + '\n' +
+    #             '\t' + Author.alive_or_deceased(self.alive))
+
     def __str__(self):
-        return (self.__name + '\n' +
-                '\t' + 'born: ' + utility.format_date(self.birth_date) + '\n' +
-                # '\t' + 'age: ' + str(self.__age) + '\n' +
-                '\t' + 'age: ' + str(self.age) + '\n' +
-                '\t' + 'place of birth: ' + str(self.birth_place) + '\n' +
-                '\t' + 'nationality: ' + str(self.nationality) + '\n' +
-                '\t' + Author.alive_or_deceased(self.alive))
+        return '{}\n\tborn: {}\n\tage: {}\n\tplace of birth: {}\n\tnationality: {}\n\t{}\n'.\
+            format(self.name, str(self.birth_date) if isinstance(self.birth_date, date) else 'unknown',
+                   str(self.age), self.birth_place, self.nationality, Author.alive_or_deceased(self.alive))
+
+    # def __eq__(self, other):
+    #     if self.__class__ != other.__class__:
+    #         return False
+    #     if (self.__name == other.name) and (self.birth_date == other.birth_date):
+    #         return True
+    #     else:
+    #         return False
 
     def __eq__(self, other):
-        if self.__class__ != other.__class__:
-            return False
-        if (self.__name == other.name) and (self.birth_date == other.birth_date):
-            return True
-        else:
-            return False
+        return True if isinstance(other, Author) and other.name == self.name and other.birth_date == self.birth_date \
+            else False
 
     @classmethod
     def show_definition(cls):
@@ -121,32 +131,35 @@ class Author:
 
     @classmethod
     def get_instance(cls, name):                            # alternative constructor
-        if isinstance(name, str):
-            return cls(name)
-        else:
-            return cls('unknown')
+        # if isinstance(name, str):
+        #     return cls(name)
+        # else:
+        #     return cls('unknown')
+        return cls(name) if isinstance(name, str) else cls('unknown')
 
     @staticmethod
     def format_author(author):
         """Converts author object to its name field, for printing purposes.
         """
 
-        if isinstance(author, Author):
-            return author.name
-        else:
-            return 'unknown'
+        # if isinstance(author, Author):
+        #     return author.name
+        # else:
+        #     return 'unknown'
+        return author.name if isinstance(author, Author) and isinstance(author.name, str) and author.name else 'unknown'
 
     @staticmethod
     def alive_or_deceased(alive):
         """Converts the status of being alive or deceased from boolean to string.
         """
 
-        if isinstance(alive, bool):
-            return 'alive' if alive else 'deceased'
-        elif isinstance(alive, Lives):
-            return 'alive' if alive == Lives.ALIVE else 'deceased'
-        else:
-            return 'Alive/Deceased: unknown'
+        # if isinstance(alive, bool):
+        #     return 'alive' if alive else 'deceased'
+        # elif isinstance(alive, Lives):
+        #     return 'alive' if alive == Lives.ALIVE else 'deceased'
+        # else:
+        #     return 'Alive/Deceased: unknown'
+        return 'alive' if alive == Lives.ALIVE else 'deceased' if alive == Lives.DECEASED else 'alive/deceased: unknown'
 
     # def py_to_json(self):                                   # developed just for testing
     #     d = self.__dict__

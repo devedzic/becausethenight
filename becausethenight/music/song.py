@@ -24,7 +24,8 @@ class Song:
 
     def __str__(self):
         return (self.title + '\n' +
-                '\t' + 'performer(s): ' + str(self.performer) + '\n' +
+                # '\t' + 'performer(s): ' + str(self.performer) + '\n' +
+                '\t' + 'performer(s): ' + Performer.format_performer(self.performer) + '\n' +
                 '\t' + 'author(s): ' + Author.format_author(self.author) + '\n' +
                 # '\t' + 'duration: ' + str(self.duration) + '\n' +
                 # '\t' + 'duration: ' + "%d:%02d" % divmod(self.duration, 60) + '\n' +
@@ -32,18 +33,32 @@ class Song:
                 # '\t' + 'released: ' + str(self.releaseDate))
                 '\t' + 'released: ' + utility.format_date(self.release_date))
 
+    # def __str__(self):
+    #     return '{}\n\tperformer(s): {}\n\tauthor(s): {}\n\tduration: {}\n\trelease date: {}'.\
+    #         format(self.title, str(self.performer), str(self.author), str(self.duration), str(self.release_date), )
+
+    # def __eq__(self, other):
+    #     if self.__class__ != other.__class__:
+    #         return False
+    #     if (self.title == other.title) and (self.performer == other.performer):
+    #         return True
+    #     else:
+    #         return False
+
     def __eq__(self, other):
-        if self.__class__ != other.__class__:
+        if not isinstance(other, Song):
             return False
-        if (self.title == other.title) and (self.performer == other.performer):
-            return True
-        else:
-            return False
+        return True if self.title == other.title and self.performer == other.performer else False
+
+    # def play(self):
+    #     # print('Playing:', self.author + ' - ', self.title + '...')
+    #     # print('Playing:', str(self.author) + ' -', self.title + '...')
+    #     print('Playing:', Author.format_author(self.author) + ' -', self.title + '...')
 
     def play(self):
-        # print('Playing:', self.author + ' - ', self.title + '...')
-        # print('Playing:', str(self.author) + ' -', self.title + '...')
-        print('Playing:', Author.format_author(self.author) + ' -', self.title + '...')
+        # print('Playing:', self.title)
+        print('Playing: {} ({})'.
+              format(self.title, self.performer.format_performer() if not self.performer else 'performer unknown'))
 
 # The following functions have been moved to the utils.utility module:
 
@@ -132,7 +147,7 @@ if __name__ == "__main__":
         outfile.write(str.encode(str(because_the_night)))
     print()
 
-    print('Reading from a binary file...')                # demonstrate reading from a binary file
+    print('Reading from a binary file...')              # demonstrate reading from a binary file
     with open('because_the_night', 'rb') as infile:
         s = infile.read()
     print(s)
