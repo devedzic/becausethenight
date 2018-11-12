@@ -1,6 +1,7 @@
 """Domain classes and functions related to the concept of album
 """
-
+import random
+from time import perf_counter
 
 from becausethenight.util import utility
 
@@ -104,6 +105,30 @@ def generate_songs(songs):
         i += 1
 
 
+def shuffle(album, seed, play_time):
+    """A generator of song titles from a given album in random order.
+    Simulates shuffle-playing of songs from the album
+    for play_time time (a float number expected by time.perf_counter()).
+    """
+
+    random.seed(seed)
+    i = random.randint(0, len(album.songs) - 1)
+    play_until = perf_counter() + play_time
+
+    while perf_counter() < play_until:
+        # print('Next song: ')
+        yield album.songs[i].title
+        i = random.randint(0, len(album.songs) - 1)
+
+    # Alternatively:
+    # while True:
+    #     # print('Next song: ')
+    #     yield album.songs[i].title
+    #     if perf_counter() > play_until:
+    #         break
+    #     i = random.randint(0, len(album.songs) - 1)
+
+
 if __name__ == "__main__":
 
     from becausethenight.music.song import Song
@@ -189,6 +214,10 @@ if __name__ == "__main__":
     #
     # print("Songs on the 'Easter' album:")
     # for song in generate_songs(easter.songs):
+    #     print(song)
+    # print()
+    #
+    # for song in shuffle(easter, 23, 0.0001):
     #     print(song)
     # print()
     #
