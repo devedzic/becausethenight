@@ -233,6 +233,9 @@ if __name__ == "__main__":
     #     #     break
     #     except IndexError as err:
     #         print("Exception:", err.args[0], "(i = " + str(i) + ").")
+    #         # print(err)
+    #         # print(err.args)
+    #         # print(type(err).__name__)
     #         break
     # print()
     #

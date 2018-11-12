@@ -4,6 +4,7 @@
 
 from becausethenight.util import utility
 from becausethenight.music.author import Author
+from becausethenight.music.performer import Performer
 
 
 class Song:
