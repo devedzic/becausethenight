@@ -200,7 +200,7 @@ if __name__ == '__main__':
     # print()
     # new_dir = Path.cwd() / 'new/data/blues'
     # new_dir.mkdir(parents=True, exist_ok=True)
-    # new_dir.rmdir()                                                     # rmdir() requres the dir to be empty
+    # new_dir.rmdir()                                                     # rmdir() requires the dir to be empty
     # print(new_dir)
 
     # print('get_data_dir():', get_data_dir())
