@@ -231,15 +231,15 @@ if __name__ == "__main__":
     #     #     # print("Exception:", err.args, "(i = " + str(i) + ").")
     #     #     print("Exception:", err.args[0], "(i = " + str(i) + ").")
     #     #     break
-    #     except IndexError as err:
-    #         print("Exception:", err.args[0], "(i = " + str(i) + ").")
-    #         # print(err)
-    #         # print(err.args)
-    #         # print(type(err).__name__)
-    #         break
+    #     # except IndexError as err:
+    #     #     print("Exception:", err.args[0], "(i = " + str(i) + ").")
+    #     #     # print(err)
+    #     #     # print(err.args)
+    #     #     # print(type(err).__name__)
+    #     #     break
     # print()
     #
-    # for i in range(2):                                          # demonstrate catching multiple exceptions and finally
+    # for i in range(5):                                          # demonstrate catching multiple exceptions and finally
     #     try:
     #         print(songs[i])
     #         print(songs[i] / 4)
