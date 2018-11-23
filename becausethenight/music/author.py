@@ -222,7 +222,7 @@ class AuthorEncoder(json.JSONEncoder):
 
     def default(self, o):
         if isinstance(o, Author):
-            d = o.__dict__
+            d = o.__dict__.copy()
             d['birth_date'] = utility.date_py_to_json(o.birth_date)
             if o.alive or o.alive == Lives.ALIVE:
                 d['alive'] = True
