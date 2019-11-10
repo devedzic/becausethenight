@@ -79,7 +79,7 @@ def show_author(artwork_f):
         authors = list(args)
         del authors[0]                                  # assuming the first arg is the song title
         i = 0
-        for a in authors:                               # looks more compact wth an iterator
+        for a in authors:                               # looks more compact with an iterator
             print(a, end='')
             if i < (len(authors) - 1):
                 print(", ", end='')
